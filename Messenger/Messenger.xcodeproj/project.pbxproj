@@ -9,13 +9,15 @@
 /* Begin PBXBuildFile section */
 		536EE2FB262E011D00EECB3F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536EE2FA262E011D00EECB3F /* AppDelegate.swift */; };
 		536EE2FD262E011D00EECB3F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536EE2FC262E011D00EECB3F /* SceneDelegate.swift */; };
-		536EE2FF262E011D00EECB3F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536EE2FE262E011D00EECB3F /* ViewController.swift */; };
-		536EE302262E011D00EECB3F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 536EE300262E011D00EECB3F /* Main.storyboard */; };
 		536EE305262E011D00EECB3F /* Messenger.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 536EE303262E011D00EECB3F /* Messenger.xcdatamodeld */; };
 		536EE307262E011F00EECB3F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 536EE306262E011F00EECB3F /* Assets.xcassets */; };
 		536EE30A262E011F00EECB3F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 536EE308262E011F00EECB3F /* LaunchScreen.storyboard */; };
 		536EE315262E011F00EECB3F /* MessengerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536EE314262E011F00EECB3F /* MessengerTests.swift */; };
 		536EE320262E011F00EECB3F /* MessengerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536EE31F262E011F00EECB3F /* MessengerUITests.swift */; };
+		536EE339262E023000EECB3F /* BaseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536EE338262E023000EECB3F /* BaseCoordinator.swift */; };
+		536EE33E262E03FC00EECB3F /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536EE33D262E03FC00EECB3F /* MainCoordinator.swift */; };
+		536EE344262E064000EECB3F /* OnboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536EE343262E064000EECB3F /* OnboardViewController.swift */; };
+		536EE34C262E089900EECB3F /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536EE34B262E089900EECB3F /* Storyboarded.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,8 +41,6 @@
 		536EE2F7262E011D00EECB3F /* Messenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Messenger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		536EE2FA262E011D00EECB3F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		536EE2FC262E011D00EECB3F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		536EE2FE262E011D00EECB3F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		536EE301262E011D00EECB3F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		536EE304262E011D00EECB3F /* Messenger.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Messenger.xcdatamodel; sourceTree = "<group>"; };
 		536EE306262E011F00EECB3F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		536EE309262E011F00EECB3F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -51,6 +51,10 @@
 		536EE31B262E011F00EECB3F /* MessengerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MessengerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		536EE31F262E011F00EECB3F /* MessengerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessengerUITests.swift; sourceTree = "<group>"; };
 		536EE321262E011F00EECB3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		536EE338262E023000EECB3F /* BaseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCoordinator.swift; sourceTree = "<group>"; };
+		536EE33D262E03FC00EECB3F /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		536EE343262E064000EECB3F /* OnboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardViewController.swift; sourceTree = "<group>"; };
+		536EE34B262E089900EECB3F /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,10 +105,11 @@
 		536EE2F9262E011D00EECB3F /* Messenger */ = {
 			isa = PBXGroup;
 			children = (
+				536EE342262E061700EECB3F /* ViewController */,
+				536EE331262E017F00EECB3F /* Coordinator */,
+				536EE330262E017600EECB3F /* View */,
 				536EE2FA262E011D00EECB3F /* AppDelegate.swift */,
 				536EE2FC262E011D00EECB3F /* SceneDelegate.swift */,
-				536EE2FE262E011D00EECB3F /* ViewController.swift */,
-				536EE300262E011D00EECB3F /* Main.storyboard */,
 				536EE306262E011F00EECB3F /* Assets.xcassets */,
 				536EE308262E011F00EECB3F /* LaunchScreen.storyboard */,
 				536EE30B262E011F00EECB3F /* Info.plist */,
@@ -129,6 +134,31 @@
 				536EE321262E011F00EECB3F /* Info.plist */,
 			);
 			path = MessengerUITests;
+			sourceTree = "<group>";
+		};
+		536EE330262E017600EECB3F /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		536EE331262E017F00EECB3F /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				536EE338262E023000EECB3F /* BaseCoordinator.swift */,
+				536EE33D262E03FC00EECB3F /* MainCoordinator.swift */,
+				536EE34B262E089900EECB3F /* Storyboarded.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		536EE342262E061700EECB3F /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				536EE343262E064000EECB3F /* OnboardViewController.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,7 +266,6 @@
 			files = (
 				536EE30A262E011F00EECB3F /* LaunchScreen.storyboard in Resources */,
 				536EE307262E011F00EECB3F /* Assets.xcassets in Resources */,
-				536EE302262E011D00EECB3F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,10 +290,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				536EE2FF262E011D00EECB3F /* ViewController.swift in Sources */,
 				536EE2FB262E011D00EECB3F /* AppDelegate.swift in Sources */,
 				536EE2FD262E011D00EECB3F /* SceneDelegate.swift in Sources */,
+				536EE344262E064000EECB3F /* OnboardViewController.swift in Sources */,
 				536EE305262E011D00EECB3F /* Messenger.xcdatamodeld in Sources */,
+				536EE33E262E03FC00EECB3F /* MainCoordinator.swift in Sources */,
+				536EE339262E023000EECB3F /* BaseCoordinator.swift in Sources */,
+				536EE34C262E089900EECB3F /* Storyboarded.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,14 +332,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		536EE300262E011D00EECB3F /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				536EE301262E011D00EECB3F /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		536EE308262E011F00EECB3F /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
