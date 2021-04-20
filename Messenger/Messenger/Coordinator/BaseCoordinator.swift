@@ -9,7 +9,12 @@ import Foundation
 import UIKit
 
 protocol BaseCoordinator {
-    var childCoordinator: [BaseCoordinator] {get set}
-    var navigationController: UINavigationController {get set}
     func start()
+    func coordinate(to coordinator: BaseCoordinator)
+}
+
+extension BaseCoordinator {
+    func coordinate(to coordinator: BaseCoordinator) {
+        coordinator.start()
+    }
 }
