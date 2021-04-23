@@ -9,7 +9,15 @@ import Foundation
 import UIKit
 
 class OnboardCoordinator: BaseCoordinator {
+    let navigationController: UINavigationController
+    
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
+    }
+    
     func start() {
-        
+        let viewController = OnboardViewController()
+        viewController.coordinator = self
+        navigationController.pushViewController(viewController, animated: true)
     }
 }

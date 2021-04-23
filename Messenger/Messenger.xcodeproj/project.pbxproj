@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5347DAD22631D34C001CBC1E /* SceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5347DAD12631D34C001CBC1E /* SceneCoordinator.swift */; };
+		5347DADA2631DF80001CBC1E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5347DAD92631DF80001CBC1E /* LoginViewController.swift */; };
 		536EE2FB262E011D00EECB3F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536EE2FA262E011D00EECB3F /* AppDelegate.swift */; };
 		536EE2FD262E011D00EECB3F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536EE2FC262E011D00EECB3F /* SceneDelegate.swift */; };
 		536EE305262E011D00EECB3F /* Messenger.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 536EE303262E011D00EECB3F /* Messenger.xcdatamodeld */; };
@@ -45,6 +47,8 @@
 		252E57FA823CEA2383C292CB /* Pods-Messenger-MessengerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Messenger-MessengerUITests.release.xcconfig"; path = "Target Support Files/Pods-Messenger-MessengerUITests/Pods-Messenger-MessengerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		2C837059C975794B39F68A24 /* Pods-Messenger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Messenger.release.xcconfig"; path = "Target Support Files/Pods-Messenger/Pods-Messenger.release.xcconfig"; sourceTree = "<group>"; };
 		50DBA671CE3BCD6438651EA4 /* Pods-Messenger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Messenger.debug.xcconfig"; path = "Target Support Files/Pods-Messenger/Pods-Messenger.debug.xcconfig"; sourceTree = "<group>"; };
+		5347DAD12631D34C001CBC1E /* SceneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCoordinator.swift; sourceTree = "<group>"; };
+		5347DAD92631DF80001CBC1E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		536EE2F7262E011D00EECB3F /* Messenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Messenger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		536EE2FA262E011D00EECB3F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		536EE2FC262E011D00EECB3F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -164,6 +168,7 @@
 			children = (
 				536EE338262E023000EECB3F /* BaseCoordinator.swift */,
 				5373E9A6262F466000F083D8 /* AppCoordinator.swift */,
+				5347DAD12631D34C001CBC1E /* SceneCoordinator.swift */,
 				5373E9AE262F48CB00F083D8 /* OnboardCoordinator.swift */,
 			);
 			path = Coordinator;
@@ -173,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				536EE343262E064000EECB3F /* OnboardViewController.swift */,
+				5347DAD92631DF80001CBC1E /* LoginViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -196,7 +202,6 @@
 				21407AF1D4F6BDA9662FF9BC /* Pods-MessengerTests.debug.xcconfig */,
 				B80554A0A556902E8F2B0C40 /* Pods-MessengerTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -447,9 +452,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5347DADA2631DF80001CBC1E /* LoginViewController.swift in Sources */,
 				536EE2FB262E011D00EECB3F /* AppDelegate.swift in Sources */,
 				536EE2FD262E011D00EECB3F /* SceneDelegate.swift in Sources */,
 				536EE344262E064000EECB3F /* OnboardViewController.swift in Sources */,
+				5347DAD22631D34C001CBC1E /* SceneCoordinator.swift in Sources */,
 				536EE305262E011D00EECB3F /* Messenger.xcdatamodeld in Sources */,
 				536EE339262E023000EECB3F /* BaseCoordinator.swift in Sources */,
 				5373E9AF262F48CB00F083D8 /* OnboardCoordinator.swift in Sources */,

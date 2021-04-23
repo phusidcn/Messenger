@@ -23,7 +23,8 @@ class AppCoordinator: BaseCoordinator {
         if isLoggedIn {
             
         } else {
-            let 
+            let onboardCoordinator = OnboardCoordinator(navigationController: navigationController)
+            onboardCoordinator.start()
         }
     }
 }
