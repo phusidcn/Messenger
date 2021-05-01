@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		530394F326395ECB0053F169 /* ChatThreadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530394F226395ECB0053F169 /* ChatThreadCell.swift */; };
 		5347DAD22631D34C001CBC1E /* SceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5347DAD12631D34C001CBC1E /* SceneCoordinator.swift */; };
 		5347DADA2631DF80001CBC1E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5347DAD92631DF80001CBC1E /* LoginViewController.swift */; };
 		536EE2FB262E011D00EECB3F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536EE2FA262E011D00EECB3F /* AppDelegate.swift */; };
@@ -20,6 +21,16 @@
 		536EE344262E064000EECB3F /* OnboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536EE343262E064000EECB3F /* OnboardViewController.swift */; };
 		5373E9A7262F466000F083D8 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5373E9A6262F466000F083D8 /* AppCoordinator.swift */; };
 		5373E9AF262F48CB00F083D8 /* OnboardCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5373E9AE262F48CB00F083D8 /* OnboardCoordinator.swift */; };
+		53C39D2F263D07E200272753 /* ChatWindowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C39D2E263D07E200272753 /* ChatWindowViewController.swift */; };
+		53C39D31263D080B00272753 /* ChatWindowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C39D30263D080B00272753 /* ChatWindowCoordinator.swift */; };
+		53C39D33263D0AE400272753 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C39D32263D0AE400272753 /* UserModel.swift */; };
+		53C39D35263D0BC000272753 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C39D34263D0BC000272753 /* MessageModel.swift */; };
+		53C39D37263D0ECA00272753 /* QuickActionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C39D36263D0ECA00272753 /* QuickActionModel.swift */; };
+		53E1E85926353FC7009BAC13 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1E85826353FC7009BAC13 /* LoginCoordinator.swift */; };
+		53E1E85E26354692009BAC13 /* SignUpCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1E85D26354692009BAC13 /* SignUpCoordinator.swift */; };
+		53E1E8632635472C009BAC13 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E1E8622635472C009BAC13 /* SignUpViewController.swift */; };
+		53E92E282637C0F30004607A /* ChatThreadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E92E272637C0F30004607A /* ChatThreadViewController.swift */; };
+		53E92E2D2637C1080004607A /* ChatThreadCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53E92E2C2637C1080004607A /* ChatThreadCoordinator.swift */; };
 		87420938D7AD46F40AA1B972 /* Pods_Messenger_MessengerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FC0AEBD98E950055812264C /* Pods_Messenger_MessengerUITests.framework */; };
 		9C8B0495CFC314A432125D69 /* Pods_Messenger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF3FB4AF4DB6AE6606E5241E /* Pods_Messenger.framework */; };
 		C01BD42803B7A5BE3873DA1A /* Pods_MessengerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EF99B64A9CC749B36A46902 /* Pods_MessengerTests.framework */; };
@@ -47,6 +58,7 @@
 		252E57FA823CEA2383C292CB /* Pods-Messenger-MessengerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Messenger-MessengerUITests.release.xcconfig"; path = "Target Support Files/Pods-Messenger-MessengerUITests/Pods-Messenger-MessengerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		2C837059C975794B39F68A24 /* Pods-Messenger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Messenger.release.xcconfig"; path = "Target Support Files/Pods-Messenger/Pods-Messenger.release.xcconfig"; sourceTree = "<group>"; };
 		50DBA671CE3BCD6438651EA4 /* Pods-Messenger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Messenger.debug.xcconfig"; path = "Target Support Files/Pods-Messenger/Pods-Messenger.debug.xcconfig"; sourceTree = "<group>"; };
+		530394F226395ECB0053F169 /* ChatThreadCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatThreadCell.swift; sourceTree = "<group>"; };
 		5347DAD12631D34C001CBC1E /* SceneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCoordinator.swift; sourceTree = "<group>"; };
 		5347DAD92631DF80001CBC1E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		536EE2F7262E011D00EECB3F /* Messenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Messenger.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,6 +78,16 @@
 		536EE343262E064000EECB3F /* OnboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardViewController.swift; sourceTree = "<group>"; };
 		5373E9A6262F466000F083D8 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		5373E9AE262F48CB00F083D8 /* OnboardCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardCoordinator.swift; sourceTree = "<group>"; };
+		53C39D2E263D07E200272753 /* ChatWindowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatWindowViewController.swift; sourceTree = "<group>"; };
+		53C39D30263D080B00272753 /* ChatWindowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatWindowCoordinator.swift; sourceTree = "<group>"; };
+		53C39D32263D0AE400272753 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		53C39D34263D0BC000272753 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
+		53C39D36263D0ECA00272753 /* QuickActionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickActionModel.swift; sourceTree = "<group>"; };
+		53E1E85826353FC7009BAC13 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
+		53E1E85D26354692009BAC13 /* SignUpCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCoordinator.swift; sourceTree = "<group>"; };
+		53E1E8622635472C009BAC13 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		53E92E272637C0F30004607A /* ChatThreadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatThreadViewController.swift; sourceTree = "<group>"; };
+		53E92E2C2637C1080004607A /* ChatThreadCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatThreadCoordinator.swift; sourceTree = "<group>"; };
 		7EF99B64A9CC749B36A46902 /* Pods_MessengerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MessengerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FC0AEBD98E950055812264C /* Pods_Messenger_MessengerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Messenger_MessengerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B80554A0A556902E8F2B0C40 /* Pods-MessengerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessengerTests.release.xcconfig"; path = "Target Support Files/Pods-MessengerTests/Pods-MessengerTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -101,6 +123,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		530394F126395D240053F169 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				53C39D32263D0AE400272753 /* UserModel.swift */,
+				53C39D34263D0BC000272753 /* MessageModel.swift */,
+				53C39D36263D0ECA00272753 /* QuickActionModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		536EE2EE262E011D00EECB3F = {
 			isa = PBXGroup;
 			children = (
@@ -126,6 +158,8 @@
 		536EE2F9262E011D00EECB3F /* Messenger */ = {
 			isa = PBXGroup;
 			children = (
+				53C39D38263D0FAB00272753 /* ViewModel */,
+				530394F126395D240053F169 /* Model */,
 				5373E9A5262F42C600F083D8 /* App */,
 				536EE342262E061700EECB3F /* ViewController */,
 				536EE331262E017F00EECB3F /* Coordinator */,
@@ -159,6 +193,7 @@
 		536EE330262E017600EECB3F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				530394F226395ECB0053F169 /* ChatThreadCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -170,6 +205,10 @@
 				5373E9A6262F466000F083D8 /* AppCoordinator.swift */,
 				5347DAD12631D34C001CBC1E /* SceneCoordinator.swift */,
 				5373E9AE262F48CB00F083D8 /* OnboardCoordinator.swift */,
+				53E1E85826353FC7009BAC13 /* LoginCoordinator.swift */,
+				53E1E85D26354692009BAC13 /* SignUpCoordinator.swift */,
+				53E92E2C2637C1080004607A /* ChatThreadCoordinator.swift */,
+				53C39D30263D080B00272753 /* ChatWindowCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -179,6 +218,9 @@
 			children = (
 				536EE343262E064000EECB3F /* OnboardViewController.swift */,
 				5347DAD92631DF80001CBC1E /* LoginViewController.swift */,
+				53E1E8622635472C009BAC13 /* SignUpViewController.swift */,
+				53E92E272637C0F30004607A /* ChatThreadViewController.swift */,
+				53C39D2E263D07E200272753 /* ChatWindowViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -190,6 +232,13 @@
 				536EE2FC262E011D00EECB3F /* SceneDelegate.swift */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		53C39D38263D0FAB00272753 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		B29EF15BA4ED6B102B1FCA64 /* Pods */ = {
@@ -452,15 +501,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53C39D2F263D07E200272753 /* ChatWindowViewController.swift in Sources */,
 				5347DADA2631DF80001CBC1E /* LoginViewController.swift in Sources */,
 				536EE2FB262E011D00EECB3F /* AppDelegate.swift in Sources */,
+				53E1E85926353FC7009BAC13 /* LoginCoordinator.swift in Sources */,
 				536EE2FD262E011D00EECB3F /* SceneDelegate.swift in Sources */,
+				53E92E2D2637C1080004607A /* ChatThreadCoordinator.swift in Sources */,
 				536EE344262E064000EECB3F /* OnboardViewController.swift in Sources */,
 				5347DAD22631D34C001CBC1E /* SceneCoordinator.swift in Sources */,
+				53E1E8632635472C009BAC13 /* SignUpViewController.swift in Sources */,
+				53C39D37263D0ECA00272753 /* QuickActionModel.swift in Sources */,
 				536EE305262E011D00EECB3F /* Messenger.xcdatamodeld in Sources */,
 				536EE339262E023000EECB3F /* BaseCoordinator.swift in Sources */,
+				53E92E282637C0F30004607A /* ChatThreadViewController.swift in Sources */,
+				53C39D35263D0BC000272753 /* MessageModel.swift in Sources */,
 				5373E9AF262F48CB00F083D8 /* OnboardCoordinator.swift in Sources */,
 				5373E9A7262F466000F083D8 /* AppCoordinator.swift in Sources */,
+				53C39D31263D080B00272753 /* ChatWindowCoordinator.swift in Sources */,
+				530394F326395ECB0053F169 /* ChatThreadCell.swift in Sources */,
+				53C39D33263D0AE400272753 /* UserModel.swift in Sources */,
+				53E1E85E26354692009BAC13 /* SignUpCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -630,6 +690,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3NLA5R24DG;
 				INFOPLIST_FILE = Messenger/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -649,6 +710,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3NLA5R24DG;
 				INFOPLIST_FILE = Messenger/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

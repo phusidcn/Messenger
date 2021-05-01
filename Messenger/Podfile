@@ -6,6 +6,7 @@ target 'Messenger' do
   use_frameworks!
   pod 'SwiftyOnboard'
   pod 'Starscream', '~> 4.0.0'
+  pod 'SwiftyButton'
 
   # Pods for Messenger
 

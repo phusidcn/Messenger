@@ -1,4 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20D91" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Friend" representedClassName="Friend" syncable="YES" codeGenerationType="class">
+        <attribute name="alias" optional="YES" attributeType="String"/>
+        <attribute name="friend_id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="phone" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Message" representedClassName="Message" syncable="YES" codeGenerationType="class">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="message_content" optional="YES" attributeType="String"/>
+        <attribute name="message_id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="receiver_id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="sender_id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+    </entity>
+    <entity name="QuickAction" representedClassName="QuickAction" syncable="YES" codeGenerationType="class">
+        <attribute name="action_content" optional="YES" attributeType="String"/>
+        <attribute name="action_id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="expired_time" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="user_id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+    </entity>
+    <elements>
+        <element name="Friend" positionX="-63" positionY="-18" width="128" height="89"/>
+        <element name="Message" positionX="-54" positionY="18" width="128" height="104"/>
+        <element name="QuickAction" positionX="-54" positionY="36" width="128" height="89"/>
+    </elements>
 </model>
