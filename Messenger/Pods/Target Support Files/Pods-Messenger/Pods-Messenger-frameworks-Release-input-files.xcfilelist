@@ -1,4 +1,6 @@
 ${PODS_ROOT}/Target Support Files/Pods-Messenger/Pods-Messenger-frameworks.sh
+${BUILT_PRODUCTS_DIR}/ChatViewController/ChatViewController.framework
+${BUILT_PRODUCTS_DIR}/PlaceholderUITextView/PlaceholderUITextView.framework
 ${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework
 ${BUILT_PRODUCTS_DIR}/SwiftyButton/SwiftyButton.framework
 ${BUILT_PRODUCTS_DIR}/SwiftyOnboard/SwiftyOnboard.framework

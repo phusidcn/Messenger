@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20D91" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Friend" representedClassName="Friend" syncable="YES" codeGenerationType="class">
-        <attribute name="alias" optional="YES" attributeType="String"/>
-        <attribute name="friend_id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="phone" optional="YES" attributeType="String"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20E232" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Friendship" representedClassName="Friendship" syncable="YES" codeGenerationType="class">
+        <attribute name="attribute" optional="YES"/>
+        <attribute name="friendship_id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="user1" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="user1_alias" optional="YES" attributeType="String"/>
+        <attribute name="user2" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="user2_alias" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Group" representedClassName="Group" syncable="YES" codeGenerationType="class">
+        <attribute name="create_date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="group_id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="group_name" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Group_User" representedClassName="Group_User" syncable="YES" codeGenerationType="class">
+        <attribute name="group_id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="is_admin" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="user_id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
     </entity>
     <entity name="Message" representedClassName="Message" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -19,9 +32,19 @@
         <attribute name="expired_time" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="user_id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
     </entity>
+    <entity name="User" representedClassName="User" syncable="YES" codeGenerationType="class">
+        <attribute name="birthdate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="password" optional="YES" attributeType="String"/>
+        <attribute name="phone" optional="YES" attributeType="String"/>
+        <attribute name="user_id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="user_name" optional="YES" attributeType="String"/>
+    </entity>
     <elements>
-        <element name="Friend" positionX="-63" positionY="-18" width="128" height="89"/>
+        <element name="Friendship" positionX="-63" positionY="-18" width="128" height="119"/>
         <element name="Message" positionX="-54" positionY="18" width="128" height="104"/>
         <element name="QuickAction" positionX="-54" positionY="36" width="128" height="89"/>
+        <element name="User" positionX="-45" positionY="45" width="128" height="104"/>
+        <element name="Group" positionX="-36" positionY="72" width="128" height="74"/>
+        <element name="Group_User" positionX="-18" positionY="81" width="128" height="89"/>
     </elements>
 </model>
