@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20E232" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Friendship" representedClassName="Friendship" syncable="YES" codeGenerationType="class">
-        <attribute name="attribute" optional="YES"/>
         <attribute name="friendship_id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="user1" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="user1_alias" optional="YES" attributeType="String"/>
@@ -40,11 +39,11 @@
         <attribute name="user_name" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Friendship" positionX="-63" positionY="-18" width="128" height="119"/>
+        <element name="Friendship" positionX="-63" positionY="-18" width="128" height="104"/>
+        <element name="Group" positionX="-36" positionY="72" width="128" height="74"/>
+        <element name="Group_User" positionX="-18" positionY="81" width="128" height="89"/>
         <element name="Message" positionX="-54" positionY="18" width="128" height="104"/>
         <element name="QuickAction" positionX="-54" positionY="36" width="128" height="89"/>
         <element name="User" positionX="-45" positionY="45" width="128" height="104"/>
-        <element name="Group" positionX="-36" positionY="72" width="128" height="74"/>
-        <element name="Group_User" positionX="-18" positionY="81" width="128" height="89"/>
     </elements>
 </model>
