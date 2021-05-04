@@ -8,6 +8,8 @@ target 'Messenger' do
   pod 'Starscream', '~> 4.0.0'
   pod 'SwiftyButton'
   pod 'ChatViewController'
+  pod 'Kingfisher'
+  pod 'SwiftyJSON' 
 
   # Pods for Messenger
 
