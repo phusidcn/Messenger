@@ -20,7 +20,7 @@ struct MessageModel: Decodable {
     let type: MessageType
     var text: String?
     var file: FileInfo?
-    let sendByID: Int!
+    let sendByID: String!
     let createdAt: Date!
     let updatedAt: Date?
     var isOutgoing: Bool = true
@@ -35,7 +35,7 @@ struct MessageModel: Decodable {
         case updatedAt = "updated_at"
     }
 
-    init(id: String, type: MessageType, sendByID: Int, createdAt: Date) {
+    init(id: String, type: MessageType, sendByID: String, createdAt: Date) {
         self.id = id
         self.type = type
         self.sendByID = sendByID
@@ -44,13 +44,13 @@ struct MessageModel: Decodable {
     }
 
     /// Initialize outgoing text message
-    init(id: String, sendByID: Int, createdAt: Date, text: String) {
+    init(id: String, sendByID: String, createdAt: Date, text: String) {
         self.init(id: id, type: .text, sendByID: sendByID, createdAt: createdAt)
         self.text = text
     }
 
     /// Initialize outgoing file message
-    init(id: String, sendByID: Int, createdAt: Date, file: FileInfo) {
+    init(id: String, sendByID: String, createdAt: Date, file: FileInfo) {
         self.init(id: id, type: .file, sendByID: sendByID, createdAt: createdAt)
         self.file = file
     }

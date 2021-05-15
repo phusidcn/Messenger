@@ -9,9 +9,11 @@ import ChatViewController
 
 struct UserModel: Userable, Decodable {
 
-    let id: Int
+    let id: String
     let name: String
     let avatarURL: URL?
+    let phoneNumber: String
+    let password: String
 
     var idNumber: String {
         get {
@@ -25,15 +27,19 @@ struct UserModel: Userable, Decodable {
         }
     }
 
-    init(id: Int, name: String, avatarURL: URL? = nil) {
-        self.id = id
+    init(id: String? = nil, name: String, password: String, phoneNumber: String, avatarURL: URL? = nil) {
+        self.id = id ?? ""
         self.name = name
+        self.phoneNumber = phoneNumber
+        self.password = password
         self.avatarURL = avatarURL
     }
     
     private enum CodingKeys: String, CodingKey {
         case id
         case name
+        case phoneNumber
+        case password
         case avatarURL = "avatar_url"
     }
 }

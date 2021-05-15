@@ -58,5 +58,16 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>We need access camera to take image</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>We need to access photo to get image</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We need to access image on device</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 </dict>
 </plist>

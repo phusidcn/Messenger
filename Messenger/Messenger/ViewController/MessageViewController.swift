@@ -14,6 +14,7 @@ class MessageViewController: ChatViewController {
     var imagePickerHelper: ImagePickerHelper?
     var numberUserTypings = 0
     var coordinator: MessageViewCoordinator?
+    var socketChat: ChatSocket?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,12 @@ class MessageViewController: ChatViewController {
                 self?.updateUI()
             }
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationItem.leftItemsSupplementBackButton = true
+        self.navigationController?.navigationBar.isHidden = false
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -205,11 +212,11 @@ extension MessageViewController {
             var user: UserModel
             switch numberUserTypings {
             case 0:
-                user = UserModel(id: 1, name: "Harry")
+                user = UserModel(id: "1", name: "Harry", password: "0", phoneNumber: "0")
             case 1:
-                user = UserModel(id: 2, name: "Bob")
+                user = UserModel(id: "2", name: "Bob", password: "0", phoneNumber: "0")
             default:
-                user = UserModel(id: 3, name: "Liliana")
+                user = UserModel(id: "3", name: "Liliana", password: "0", phoneNumber: "0")
             }
             viewModel.users.append(user)
             typingIndicatorView.insertUser(user)

@@ -6,24 +6,53 @@
 //
 
 import UIKit
+import SwiftyButton
 
 class RequestFriendshipViewController: UIViewController {
-
+    
+    var coordinator: RequestFriendshipCoordinator?
+    let imageView = UIImageView()
+    let nameView = UILabel()
+    let greetingField = UITextField()
+    let requestButton = FlatButton()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        self.navigationController?.navigationBar.isHidden = false
+        self.view.backgroundColor = .white
+        self.view.addSubview(imageView)
+        self.view.addSubview(nameView)
+        self.view.addSubview(greetingField)
+        self.view.addSubview(requestButton)
+        
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        nameView.translatesAutoresizingMaskIntoConstraints = false
+        greetingField.translatesAutoresizingMaskIntoConstraints = false
+        requestButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        imageView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
+        imageView.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: self.view.frame.size.width / 2).isActive = true
+        imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor).isActive = true
+        
+        nameView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 30).isActive = true
+        nameView.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        nameView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
+        
+        greetingField.topAnchor.constraint(equalTo: nameView.bottomAnchor, constant: 50).isActive = true
+        greetingField.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        greetingField.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
+        
+        requestButton.topAnchor.constraint(equalTo: greetingField.bottomAnchor, constant: 30).isActive = true
+        requestButton.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        requestButton.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
+        requestButton.color = .systemBlue
+        requestButton.setTitle("Send friend request", for: .normal)
+        requestButton.addTarget(self, action: #selector(tappedToSendRequest(_:)), for: .touchUpInside)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @objc func tappedToSendRequest(_ sender: UIButton) {
+        
     }
-    */
-
 }

@@ -18,6 +18,7 @@ class MessageViewCoordinator: BaseCoordinator {
     func start() {
         let viewController = MessageViewController()
         viewController.coordinator = self
+        viewController.viewModel = MessageViewModel(bubbleStyle: .facebook)
         navigationController.pushViewController(viewController, animated: true)
     }
 }

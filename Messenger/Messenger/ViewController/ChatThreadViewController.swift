@@ -34,6 +34,8 @@ class ChatThreadViewController: UIViewController {
         threadView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         threadView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         
+        ChatSocket.sharedChatSocket.connect()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,8 +45,9 @@ class ChatThreadViewController: UIViewController {
 }
 
 extension ChatThreadViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        self.coordinator?.coordinateToChatWindowsWith()
+        self.coordinator?.coordinateToFriendRequest()
     }
 }
 

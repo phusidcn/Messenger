@@ -33,7 +33,7 @@ class MessageViewModel {
 
     init(bubbleStyle: BubbleStyle) {
         self.bubbleStyle = bubbleStyle
-        currentUser = UserModel(id: 2, name: "Harry Tran", avatarURL: URL(string: "https://i.imgur.com/LIe72Gc.png"))
+        currentUser = UserModel(id: "2", name: "Harry Tran", password: "0", phoneNumber: "0", avatarURL: URL(string: "https://i.imgur.com/LIe72Gc.png"))
         getUserData()
     }
 
@@ -85,7 +85,7 @@ class MessageViewModel {
 
 extension MessageViewModel {
 
-    func getUserFromID(_ id: Int) -> UserModel {
+    func getUserFromID(_ id: String) -> UserModel {
         let index = users.firstIndex(where: { $0.id == id })
         return users[index!]
     }

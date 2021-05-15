@@ -7,11 +7,12 @@
 
 import UIKit
 import SwiftyButton
+import SwiftyJSON
 
 class LoginViewController: UIViewController {
     var coordinator: LoginCoordinator?
     let iconImageView = UIImageView()
-    let userNameField = UITextField()
+    let phoneNumberField = UITextField()
     let passwordField = UITextField()
     let loginButton = FlatButton()
     let signupButton = FlatButton()
@@ -27,7 +28,7 @@ class LoginViewController: UIViewController {
         self.view.addSubview(scrollView)
         let contentView = UIView()
         contentView.addSubview(iconImageView)
-        contentView.addSubview(userNameField)
+        contentView.addSubview(phoneNumberField)
         contentView.addSubview(passwordField)
         contentView.addSubview(loginButton)
         contentView.addSubview(signupButton)
@@ -54,14 +55,14 @@ class LoginViewController: UIViewController {
         iconImageView.heightAnchor.constraint(equalTo: iconImageView.widthAnchor).isActive = true
         iconImageView.image = UIImage(named: "img_icon_chat")
         
-        userNameField.translatesAutoresizingMaskIntoConstraints = false
-        userNameField.topAnchor.constraint(equalTo: iconImageView.bottomAnchor, constant: 30).isActive = true
-        userNameField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
-        userNameField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
-        userNameField.placeholder = "User name"
+        phoneNumberField.translatesAutoresizingMaskIntoConstraints = false
+        phoneNumberField.topAnchor.constraint(equalTo: iconImageView.bottomAnchor, constant: 30).isActive = true
+        phoneNumberField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
+        phoneNumberField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
+        phoneNumberField.placeholder = "User name"
         
         passwordField.translatesAutoresizingMaskIntoConstraints = false
-        passwordField.topAnchor.constraint(equalTo: userNameField.bottomAnchor, constant: 30).isActive = true
+        passwordField.topAnchor.constraint(equalTo: phoneNumberField.bottomAnchor, constant: 30).isActive = true
         passwordField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
         passwordField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
         passwordField.isSecureTextEntry = true
@@ -120,11 +121,29 @@ class LoginViewController: UIViewController {
     }
     
     @objc func tappedToSignUpButton(sender: UIButton) {
-        coordinator?.coordinateToSignUp()
+        self.coordinator?.coordinateToThreadChat(withUserId: "")
+//        coordinator?.coordinateToSignUp()
     }
     
-    @objc func tappedToSignInButton(sender: UIButton) {
-        coordinator?.coordinateToThreadChat()
+    @objc func tappedToSignInButton(sender: UIButton){
+        if let phoneNumber = self.phoneNumberField.text, let password = self.passwordField.text {
+            let userModel = UserModel(name: "", password: password, phoneNumber: phoneNumber)
+            NetworkHandler.sharedNetworkHandler.sendLogin(with: userModel) { data, response, error in
+                let json = JSON(data)
+                if let success = json["success"].bool, success == true {
+                    NetworkHandler.sharedNetworkHandler.token = json["data"][0]["Token"].string
+                    let id = json["data"][0]["_id"].string ?? ""
+                    let name = json["data"][0]["Name"].string ?? ""
+                    let phone = json["data"][0]["Phone"].string ?? ""
+                    let password = json["data"][0]["Password"].string ?? ""
+                    let userModel = UserModel(id: id, name: name, password: password, phoneNumber: phone)
+                    CoreContext.shareCoreContext.loginByUser(user: userModel)
+                    DispatchQueue.main.async {
+                        self.coordinator?.coordinateToThreadChat(withUserId: id)
+                    }
+                }
+            }
+        }
     }
 
 }

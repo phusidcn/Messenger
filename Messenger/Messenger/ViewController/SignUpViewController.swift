@@ -7,6 +7,8 @@
 
 import UIKit
 import SwiftyButton
+import CoreData
+import SwiftyJSON
 
 class SignUpViewController: UIViewController {
     
@@ -111,7 +113,30 @@ class SignUpViewController: UIViewController {
     }
     
     @objc func tappedToRegisterButton(sender: Any) {
-        
+        if let password = self.passwordField.text,
+           let phone = self.phoneField.text,
+           let username = self.userNameField.text,
+           passwordField.text == repasswordField.text {
+            let signupUserModel = UserModel(name: username, password: password, phoneNumber: phone)
+            NetworkHandler.sharedNetworkHandler.sendSignup(with: signupUserModel) {data, response, handler in
+                do {
+                    let json = JSON(data)
+                    if let success = json["success"].bool, success == true {
+                        NetworkHandler.sharedNetworkHandler.sendLogin(with: signupUserModel) { data, response, error in
+                            let json = JSON(data)
+                            if let success = json["success"].bool, success == true {
+                                NetworkHandler.sharedNetworkHandler.token = json["data"][0].string
+                                DispatchQueue.main.async {
+                                    self.coordinator?.coordinateToThreadChat()
+                                }
+                            }
+                        }
+                    }
+                } catch let error {
+                    print(error.localizedDescription)
+                }
+            }
+        }
     }
     
     @objc func keyboardWasShow(notification: Notification) {

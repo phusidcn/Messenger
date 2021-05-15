@@ -20,4 +20,9 @@ class SignUpCoordinator: BaseCoordinator {
         viewController.coordinator = self
         navigationController.pushViewController(viewController, animated: true)
     }
+    
+    func coordinateToThreadChat() {
+        let chatThreadCoordinator = ChatThreadCoordinator(navigationController: navigationController)
+        coordinate(to: chatThreadCoordinator)
+    }
 }

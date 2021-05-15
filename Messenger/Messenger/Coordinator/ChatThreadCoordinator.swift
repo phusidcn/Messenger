@@ -25,4 +25,9 @@ class ChatThreadCoordinator: BaseCoordinator {
         let coordinator = MessageViewCoordinator(navigationController: navigationController)
         coordinate(to: coordinator)
     }
+    
+    func coordinateToFriendRequest() {
+        let coordinator = RequestFriendshipCoordinator(navigationController: navigationController)
+        coordinate(to: coordinator)
+    }
 }
