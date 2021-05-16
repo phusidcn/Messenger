@@ -10,6 +10,7 @@ import UIKit
 
 class RequestFriendshipCoordinator: BaseCoordinator {
     let navigationController: UINavigationController
+    var userInfo: UserModel?
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -17,6 +18,7 @@ class RequestFriendshipCoordinator: BaseCoordinator {
     
     func start() {
         let viewController = RequestFriendshipViewController()
+        viewController.userModel = userInfo
         viewController.coordinator = self
         self.navigationController.pushViewController(viewController, animated: true)
     }

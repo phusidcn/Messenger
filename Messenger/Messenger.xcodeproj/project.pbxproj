@@ -40,6 +40,7 @@
 		5394701E263FFA8F00014E57 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5394701D263FFA8F00014E57 /* Data.swift */; };
 		53947020263FFAA800014E57 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5394701F263FFAA800014E57 /* UIViewController.swift */; };
 		539B30902641942B00B45232 /* RequestFriendshipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539B308F2641942B00B45232 /* RequestFriendshipViewController.swift */; };
+		53A785292650E20000212933 /* ResponseRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A785282650E20000212933 /* ResponseRequestViewController.swift */; };
 		53AA3877264706C200F9CFEB /* CoreContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AA3876264706C200F9CFEB /* CoreContext.swift */; };
 		53AB7E2D264FF0DD00744FAD /* SignupNetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AB7E2C264FF0DD00744FAD /* SignupNetworkModel.swift */; };
 		53BFBCF5263F7D8800A53CE8 /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BFBCF4263F7D8800A53CE8 /* MessageViewModel.swift */; };
@@ -121,6 +122,7 @@
 		5394701D263FFA8F00014E57 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		5394701F263FFAA800014E57 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		539B308F2641942B00B45232 /* RequestFriendshipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFriendshipViewController.swift; sourceTree = "<group>"; };
+		53A785282650E20000212933 /* ResponseRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseRequestViewController.swift; sourceTree = "<group>"; };
 		53AA3876264706C200F9CFEB /* CoreContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreContext.swift; sourceTree = "<group>"; };
 		53AB7E2C264FF0DD00744FAD /* SignupNetworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupNetworkModel.swift; sourceTree = "<group>"; };
 		53BFBCF4263F7D8800A53CE8 /* MessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
@@ -292,6 +294,7 @@
 				53E92E272637C0F30004607A /* ChatThreadViewController.swift */,
 				53C39D2E263D07E200272753 /* MessageViewController.swift */,
 				539B308F2641942B00B45232 /* RequestFriendshipViewController.swift */,
+				53A785282650E20000212933 /* ResponseRequestViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -617,6 +620,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				53C39D2F263D07E200272753 /* MessageViewController.swift in Sources */,
+				53A785292650E20000212933 /* ResponseRequestViewController.swift in Sources */,
 				5347DADA2631DF80001CBC1E /* LoginViewController.swift in Sources */,
 				536EE2FB262E011D00EECB3F /* AppDelegate.swift in Sources */,
 				5394700B263FF4CD00014E57 /* ChatBarType.swift in Sources */,

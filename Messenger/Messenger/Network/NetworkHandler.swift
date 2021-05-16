@@ -7,7 +7,7 @@
 
 import Foundation
 
-let hostAddress = "192.168.1.127"
+let hostAddress = "192.168.0.129"
 let hostPort = 8080
 
 class NetworkHandler: NSObject {
@@ -24,12 +24,12 @@ class NetworkHandler: NSObject {
     }
     
     func sendSignup(with user: UserModel, completion: ((Data?, URLResponse?, Error?) -> ())?) {
-        var urlComponent = URLComponents(string: "http://fgoo.com")
-        urlComponent?.scheme = "http"
-        urlComponent?.host = hostAddress
-        urlComponent?.port = hostPort
-        urlComponent?.path = "/SignUp"
-        guard let url = urlComponent?.url else {
+        var urlComponent = URLComponents()
+        urlComponent.scheme = "http"
+        urlComponent.host = hostAddress
+        urlComponent.port = hostPort
+        urlComponent.path = "/SignUp"
+        guard let url = urlComponent.url else {
             print("failed url")
             return
         }
@@ -44,22 +44,62 @@ class NetworkHandler: NSObject {
     }
     
     func sendLogin(with user: UserModel, completion: ((Data?, URLResponse?, Error?) -> ())?) {
-        var urlComponent = URLComponents(string: "https://as.com")
-        urlComponent?.scheme = "http"
-        urlComponent?.host = hostAddress
-        urlComponent?.port = hostPort
-        urlComponent?.path = "/Login"
-        guard let url = urlComponent?.url else { return }
+        var urlComponent = URLComponents()
+        urlComponent.scheme = "http"
+        urlComponent.host = hostAddress
+        urlComponent.port = hostPort
+        urlComponent.path = "/Login"
+        guard let url = urlComponent.url else {
+            print("failed url")
+            return
+        }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        let loginBody = "{\"Phone\": \"\(user.phoneNumber)\", \"Password\": \"\(user.password)\"}"
+        let loginBody = "{\"Phone\": \"\(user.phoneNumber)\", \"Password\": \"\(user.password!)\"}"
         request.httpBody = loginBody.data(using: .utf8)
         URLSession.shared.dataTask(with: request) {data, response, error in
             completion?(data, response, error)
         }.resume()
     }
     
-    func getToken() {
-        
+    func sendSearch(withSearchEntry text: String, completion: ((Data?, URLResponse?, Error?) -> ())?) {
+        var urlComponent = URLComponents()
+        urlComponent.scheme = "http"
+        urlComponent.host = hostAddress
+        urlComponent.port = hostPort
+        urlComponent.path = "/Users"
+        urlComponent.queryItems = [URLQueryItem(name: "Phone", value: text)]
+        guard let url = urlComponent.url else {
+            print("failed url")
+            return
+        }
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.addValue(NetworkHandler.sharedNetworkHandler.getToken()!, forHTTPHeaderField: "Authorization")
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            completion?(data, response, error)
+        }.resume()
+    }
+    
+    func sendFriendListRequest(completion: ((Data?, URLResponse?, Error?) -> ())?) {
+        var urlComponent = URLComponents()
+        urlComponent.scheme = "http"
+        urlComponent.host = hostAddress
+        urlComponent.port = hostPort
+        urlComponent.path = "/"
+        guard let url = urlComponent.url else {
+            print("failed url")
+            return
+        }
+        var request = URLRequest(url: url)
+        request.addValue(NetworkHandler.sharedNetworkHandler.token!, forHTTPHeaderField: "Authorization")
+        request.httpMethod = "POST"
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            completion?(data, response, error)
+        }.resume()
+    }
+    
+    func getToken() -> String? {
+        return self.token
     }
 }

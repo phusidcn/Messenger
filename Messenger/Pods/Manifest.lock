@@ -7,6 +7,7 @@ PODS:
   - SwiftyButton (0.8.2)
   - SwiftyJSON (5.0.1)
   - SwiftyOnboard (1.3.8)
+  - Toast-Swift (5.0.1)
 
 DEPENDENCIES:
   - ChatViewController
@@ -15,6 +16,7 @@ DEPENDENCIES:
   - SwiftyButton
   - SwiftyJSON
   - SwiftyOnboard
+  - Toast-Swift (~> 5.0.1)
 
 SPEC REPOS:
   trunk:
@@ -25,6 +27,7 @@ SPEC REPOS:
     - SwiftyButton
     - SwiftyJSON
     - SwiftyOnboard
+    - Toast-Swift
 
 SPEC CHECKSUMS:
   ChatViewController: fcc9152b22a0099ced7052d842829d6a7ee9e53f
@@ -34,7 +37,8 @@ SPEC CHECKSUMS:
   SwiftyButton: 5b0ef314e9cf61cf8a83e456ddd1ea1f53f30598
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   SwiftyOnboard: de60e90c2af23dd61b01ec0c6a8d0be3370f857b
+  Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 45f13e75f0d9c9baa6e56921a20416d5422766b1
+PODFILE CHECKSUM: 8f922adab9609e77a9ba245eddde62326570e8af
 
 COCOAPODS: 1.10.1

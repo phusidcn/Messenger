@@ -10,10 +10,10 @@ import ChatViewController
 struct UserModel: Userable, Decodable {
 
     let id: String
-    let name: String
+    let name: String?
     let avatarURL: URL?
     let phoneNumber: String
-    let password: String
+    let password: String?
 
     var idNumber: String {
         get {
@@ -23,11 +23,11 @@ struct UserModel: Userable, Decodable {
 
     var displayName: String {
         get {
-            return name
+            return name ?? ""
         }
     }
 
-    init(id: String? = nil, name: String, password: String, phoneNumber: String, avatarURL: URL? = nil) {
+    init(id: String? = nil, name: String?, password: String?, phoneNumber: String, avatarURL: URL? = nil) {
         self.id = id ?? ""
         self.name = name
         self.phoneNumber = phoneNumber

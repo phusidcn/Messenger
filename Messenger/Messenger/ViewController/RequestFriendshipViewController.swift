@@ -10,6 +10,7 @@ import SwiftyButton
 
 class RequestFriendshipViewController: UIViewController {
     
+    var userModel: UserModel?
     var coordinator: RequestFriendshipCoordinator?
     let imageView = UIImageView()
     let nameView = UILabel()
@@ -39,10 +40,15 @@ class RequestFriendshipViewController: UIViewController {
         nameView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 30).isActive = true
         nameView.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         nameView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
+        nameView.textAlignment = .center
+        nameView.attributedText = NSAttributedString(string: "Marai Niken", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17, weight: .black)])
+
         
         greetingField.topAnchor.constraint(equalTo: nameView.bottomAnchor, constant: 50).isActive = true
         greetingField.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         greetingField.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
+        greetingField.placeholder = "Greeting friend request"
+        greetingField.text = "Hello, I want to make friend with you"
         
         requestButton.topAnchor.constraint(equalTo: greetingField.bottomAnchor, constant: 30).isActive = true
         requestButton.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor).isActive = true
@@ -53,6 +59,7 @@ class RequestFriendshipViewController: UIViewController {
     }
     
     @objc func tappedToSendRequest(_ sender: UIButton) {
-        
+        guard let userId = self.userModel?.id else { return }
+        ChatSocket.sharedChatSocket.sendFriendshipRequest(to: userId, greetingMessage: "Hello, I want to make friend with you")
     }
 }

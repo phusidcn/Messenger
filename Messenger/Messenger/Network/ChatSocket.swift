@@ -7,15 +7,21 @@
 
 import Foundation
 import Starscream
+import SwiftyJSON
 
-protocol ChatSocketDelegate {
-    
+protocol ChatSocketMessageDelegate {
+    func receivedMessage(text: String)
+}
+
+protocol FriendSocketDelegate {
+    func receivedFriendRequestResponse(text: String)
 }
 
 class ChatSocket: NSObject {
     
     var socket: WebSocket?
-    var delegate: ChatSocketDelegate?
+    var messengerDelegate: ChatSocketMessageDelegate?
+    var friendDelegate: FriendSocketDelegate?
     static let sharedChatSocket = ChatSocket()
     
     func connect() {
@@ -44,19 +50,37 @@ class ChatSocket: NSObject {
         socket?.write(string: string, completion: completion)
     }
     
-    func sendFriendshipRequest() {
-        
+    func sendFriendshipRequest(to userId: String, greetingMessage message: String) {
+        let requestContent = "\"\(userId)\":{\"code\":204, \"message\": \"\(message)\"}"
+        socket?.write(string: requestContent, completion: nil)
     }
-
+    
+    func handleReceivedMessage(text: String) {
+        let json = JSON(parseJSON: text)
+        if let messageType = json["code"].int {
+            switch messageType {
+            case 205:
+                let senderId = json["Id"].string //Dafuq
+            case 203:
+                let senderId = json["senderId"].string
+            case 202:
+                let senderId = json["senderId"].string
+            default:
+                print("Bug")
+            }
+        } else {
+            
+        }
+    }
 }
 
 extension ChatSocket: WebSocketDelegate {
     func didReceive(event: WebSocketEvent, client: WebSocket) {
         switch event {
         case .binary(let data):
-            print("socket: received data \(data)")
+            handleReceivedMessage(text: String(data: data, encoding: .utf8)!)
         case .text(let text):
-            print("socket: received text \(text)")
+            handleReceivedMessage(text: text)
         case .connected(let header):
             print(header)
         case .disconnected(let reason, let code):

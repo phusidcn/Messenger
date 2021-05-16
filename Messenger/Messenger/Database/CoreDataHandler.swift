@@ -10,7 +10,7 @@ import CoreData
 
 class CoreDataHandler: NSObject {
     
-    func getFriend() {
+    func getOfflineFriend() {
         
     }
     
