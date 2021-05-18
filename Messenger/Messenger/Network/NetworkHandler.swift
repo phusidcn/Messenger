@@ -7,7 +7,7 @@
 
 import Foundation
 
-let hostAddress = "192.168.0.129"
+let hostAddress = "172.20.10.10"
 let hostPort = 8080
 
 class NetworkHandler: NSObject {
@@ -75,7 +75,8 @@ class NetworkHandler: NSObject {
         }
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
-        request.addValue(NetworkHandler.sharedNetworkHandler.getToken()!, forHTTPHeaderField: "Authorization")
+        guard let token = NetworkHandler.sharedNetworkHandler.token else { return }
+        request.addValue(token, forHTTPHeaderField: "Authorization")
         URLSession.shared.dataTask(with: request) { data, response, error in
             completion?(data, response, error)
         }.resume()
@@ -86,14 +87,15 @@ class NetworkHandler: NSObject {
         urlComponent.scheme = "http"
         urlComponent.host = hostAddress
         urlComponent.port = hostPort
-        urlComponent.path = "/"
+        urlComponent.path = "/FriendShips"
         guard let url = urlComponent.url else {
             print("failed url")
             return
         }
         var request = URLRequest(url: url)
-        request.addValue(NetworkHandler.sharedNetworkHandler.token!, forHTTPHeaderField: "Authorization")
-        request.httpMethod = "POST"
+        guard let token = NetworkHandler.sharedNetworkHandler.token else { return }
+        request.addValue(token, forHTTPHeaderField: "Authorization")
+        request.httpMethod = "GET"
         URLSession.shared.dataTask(with: request) { data, response, error in
             completion?(data, response, error)
         }.resume()

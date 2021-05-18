@@ -10,7 +10,7 @@ import Foundation
 class CoreContext: NSObject {
     public static let shareCoreContext = CoreContext()
     
-    private var currentUser: UserModel?
+    var currentUser: UserModel?
     
     public var userId: String {
         get {

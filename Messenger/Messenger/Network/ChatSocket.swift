@@ -10,7 +10,7 @@ import Starscream
 import SwiftyJSON
 
 protocol ChatSocketMessageDelegate {
-    func receivedMessage(text: String)
+    func receivedMessage(text: String, from userId: String)
 }
 
 protocol FriendSocketDelegate {
@@ -25,13 +25,13 @@ class ChatSocket: NSObject {
     static let sharedChatSocket = ChatSocket()
     
     func connect() {
-        var urlComponent = URLComponents(string: "http://192.168.0.129:8080")
-        urlComponent?.scheme = "http"
-        urlComponent?.host = hostAddress
-        urlComponent?.port = hostPort
+        var urlComponent = URLComponents()
+        urlComponent.scheme = "http"
+        urlComponent.host = hostAddress
+        urlComponent.port = hostPort
         guard let token = NetworkHandler.sharedNetworkHandler.token else { return }
-        urlComponent?.queryItems = [URLQueryItem(name: "token", value: token)]
-        guard let url = urlComponent?.url else { return }
+        urlComponent.queryItems = [URLQueryItem(name: "token", value: token)]
+        guard let url = urlComponent.url else { return }
         let request = URLRequest(url: url)
         socket = WebSocket(request: request)
         socket?.delegate = self
@@ -46,16 +46,18 @@ class ChatSocket: NSObject {
         socket?.write(data: data, completion: completion)
     }
     
-    func sendMessage(string: String, withCompletion completion: (() -> ())?) {
-        socket?.write(string: string, completion: completion)
+    func sendMessage(string: String, to userModel: UserModel, withCompletion completion: (() -> ())?) {
+        let sendData = "{\"\(userModel.id)\":{\"code\": 202, \"message\": \"\(string)\"}}"
+        socket?.write(string: sendData, completion: completion)
     }
     
     func sendFriendshipRequest(to userId: String, greetingMessage message: String) {
-        let requestContent = "\"\(userId)\":{\"code\":204, \"message\": \"\(message)\"}"
+        let requestContent = "{\"\(userId)\":{\"code\":204, \"message\": \"\(message)\"}}"
         socket?.write(string: requestContent, completion: nil)
     }
     
     func handleReceivedMessage(text: String) {
+        print(text)
         let json = JSON(parseJSON: text)
         if let messageType = json["code"].int {
             switch messageType {
@@ -64,7 +66,9 @@ class ChatSocket: NSObject {
             case 203:
                 let senderId = json["senderId"].string
             case 202:
-                let senderId = json["senderId"].string
+                guard let senderId = json["senderID"].string else { return }
+                guard let messageContent = json["message"].string else { return }
+                self.messengerDelegate?.receivedMessage(text: messageContent, from: senderId)
             default:
                 print("Bug")
             }

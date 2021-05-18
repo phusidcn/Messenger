@@ -10,15 +10,20 @@ import UIKit
 
 class MessageViewCoordinator: BaseCoordinator {
     let navigationController: UINavigationController
+    let userModel: UserModel
     
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, userModel: UserModel) {
         self.navigationController = navigationController
+        self.userModel = userModel
     }
     
     func start() {
         let viewController = MessageViewController()
         viewController.coordinator = self
-        viewController.viewModel = MessageViewModel(bubbleStyle: .facebook)
+        var messageViewModel = MessageViewModel(bubbleStyle: .facebook)
+        messageViewModel.currentUser = CoreContext.shareCoreContext.currentUser
+        messageViewModel.users.append(userModel)
+        viewController.viewModel = messageViewModel
         navigationController.pushViewController(viewController, animated: true)
     }
 }

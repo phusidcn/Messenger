@@ -33,37 +33,37 @@ class MessageViewModel {
 
     init(bubbleStyle: BubbleStyle) {
         self.bubbleStyle = bubbleStyle
-        currentUser = UserModel(id: "2", name: "Harry Tran", password: "0", phoneNumber: "0", avatarURL: URL(string: "https://i.imgur.com/LIe72Gc.png"))
+        //currentUser = UserModel(id: "2", name: "Harry Tran", password: "0", phoneNumber: "0", avatarURL: URL(string: "https://i.imgur.com/LIe72Gc.png"))
         getUserData()
     }
 
     func firstLoadData(completion: @escaping (() -> ())) {
-        DispatchQueue.global(qos: .background).async { [weak self] in
-            self?.getDataFromFile(fileName: "conversation") { (messageResponse: [MessageModel], pagi) in
-                self?.messages = self!.handleDataSource(messages: messageResponse).reversed()
-                self?.pagination = pagi
-                completion()
-            }
-        }
+//        DispatchQueue.global(qos: .background).async { [weak self] in
+//            self?.getDataFromFile(fileName: "conversation") { (messageResponse: [MessageModel], pagi) in
+//                self?.messages = self!.handleDataSource(messages: messageResponse).reversed()
+//                self?.pagination = pagi
+//                completion()
+//            }
+//        }
     }
 
     func loadMoreData(completion: @escaping ((_ indexPathWillAdds: [IndexPath]) -> ())) {
-        DispatchQueue.global(qos: .background).async { [weak self] in
-            self?.getDataFromFile(fileName: "conversation_older") { (messageResponse: [MessageModel], pagi) in
-                let indexPathWillAdds = self!.getIndexPathWillAdds(newDataSize: messageResponse.count)
-                self?.messages.append(contentsOf: self!.handleDataSource(messages: messageResponse).reversed())
-                self?.pagination = pagi
-                completion(indexPathWillAdds)
-            }
-        }
+//        DispatchQueue.global(qos: .background).async { [weak self] in
+//            self?.getDataFromFile(fileName: "conversation_older") { (messageResponse: [MessageModel], pagi) in
+//                let indexPathWillAdds = self!.getIndexPathWillAdds(newDataSize: messageResponse.count)
+//                self?.messages.append(contentsOf: self!.handleDataSource(messages: messageResponse).reversed())
+//                self?.pagination = pagi
+//                completion(indexPathWillAdds)
+//            }
+//        }
     }
 
     func getUserData() {
-        DispatchQueue.global(qos: .default).async { [weak self] in
-            self?.getDataFromFile(fileName: "user") { (userResponse: [UserModel], _) in
-                self?.users = userResponse
-            }
-        }
+//        DispatchQueue.global(qos: .default).async { [weak self] in
+//            self?.getDataFromFile(fileName: "user") { (userResponse: [UserModel], _) in
+//                self?.users = userResponse
+//            }
+//        }
     }
 
     private func getDataFromFile<T>(fileName: String, completion: (_ data: [T], _ pagination: Pagination?) -> ()) where T: Decodable {
@@ -86,6 +86,7 @@ class MessageViewModel {
 extension MessageViewModel {
 
     func getUserFromID(_ id: String) -> UserModel {
+        print(id)
         let index = users.firstIndex(where: { $0.id == id })
         return users[index!]
     }

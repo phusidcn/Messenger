@@ -14,7 +14,7 @@ class MessageViewController: ChatViewController {
     var imagePickerHelper: ImagePickerHelper?
     var numberUserTypings = 0
     var coordinator: MessageViewCoordinator?
-    var socketChat: ChatSocket?
+    let i = 10
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +22,7 @@ class MessageViewController: ChatViewController {
         setupUI()
         setupData()
         bindViewModel()
+        ChatSocket.sharedChatSocket.messengerDelegate = self
 
         // Get user data firstly
         DispatchQueue.main.async { [weak self] in
@@ -49,7 +50,7 @@ class MessageViewController: ChatViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let message = viewModel.messages[indexPath.row]
+        var message = viewModel.messages[indexPath.row]
         let cellIdentifer = message.cellIdentifer()
         let user = viewModel.getUserFromID(message.sendByID)
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifer, for: indexPath) as! MessageCell
@@ -57,6 +58,7 @@ class MessageViewController: ChatViewController {
 
         cell.transform = tableView.transform
         cell.bind(withMessage: viewModel.messages[indexPath.row], user: user)
+        message.isOutgoing = message.sendByID == viewModel.currentUser?.id ? true : false
         cell.updateUIWithBubbleStyle(viewModel.bubbleStyle, isOutgoingMessage: message.isOutgoing)
         cell.updateLayoutForBubbleStyle(viewModel.bubbleStyle, positionInBlock: positionInBlock)
 
@@ -84,6 +86,9 @@ class MessageViewController: ChatViewController {
                               createdAt: Date(), text: chatBarView.textView.text)
         addMessage(message)
         super.didPressSendButton(sender)
+        guard let text = message.text else { return }
+        let receiverUser = viewModel.users[0]
+        ChatSocket.sharedChatSocket.sendMessage(string: text, to: receiverUser,withCompletion: nil)
     }
 
     override func didPressGalleryButton(_ sender: Any?) {
@@ -112,7 +117,7 @@ class MessageViewController: ChatViewController {
 extension MessageViewController {
 
     private func setupUI() {
-        title = "Liliana"
+        title = viewModel.users[0].displayName ?? "No name"
         addBackBarButton()
 
         /// Tableview
@@ -252,3 +257,10 @@ extension MessageViewController {
     }
 }
 
+extension MessageViewController: ChatSocketMessageDelegate {
+    func receivedMessage(text: String, from userId: String) {
+        var messageModel = MessageModel(id: "\(i)", sendByID: userId, createdAt: .distantPast, text: text)
+        messageModel.isOutgoing = messageModel.sendByID == viewModel.currentUser?.id ? true : false
+        addMessage(messageModel)
+    }
+}

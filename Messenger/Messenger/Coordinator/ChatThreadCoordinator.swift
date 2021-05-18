@@ -21,8 +21,8 @@ class ChatThreadCoordinator: BaseCoordinator {
         navigationController.pushViewController(viewController, animated: true)
     }
     
-    func coordinateToChatWindowsWith() {
-        let coordinator = MessageViewCoordinator(navigationController: navigationController)
+    func coordinateToChatWindowsWith(userModel: UserModel) {
+        let coordinator = MessageViewCoordinator(navigationController: navigationController, userModel: userModel)
         coordinate(to: coordinator)
     }
     

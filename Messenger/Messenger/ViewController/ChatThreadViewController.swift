@@ -38,23 +38,47 @@ class ChatThreadViewController: UIViewController {
         threadView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         threadView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         threadView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        
         ChatSocket.sharedChatSocket.connect()
-        NetworkHandler.sharedNetworkHandler.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
+        NetworkHandler.sharedNetworkHandler.sendFriendListRequest() { data, response, error in
+            let json = JSON(data)
+            if let success = json["success"].bool, success == true {
+                guard let friendList = json["data"].array else { return }
+                for user in friendList {
+                    guard let id = user["_id"].string else {
+                        print("Error")
+                        return
+                    }
+                    guard let name = user["Name"].string else {
+                        print("error")
+                        return
+                    }
+                    guard let phone = user["Phone"].string else {
+                        print("Error")
+                        return
+                    }
+                    let friend = UserModel(id: id, name: name, password: nil, phoneNumber: phone, avatarURL: nil)
+                    self.friendList.append(friend)
+                }
+                DispatchQueue.main.async {
+                    self.threadView.reloadData()
+                }
+            }
+        }
     }
 }
 
 extension ChatThreadViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if true {
+        if false {
             self.coordinator?.coordinateToFriendRequestWithUser(searchResultList[indexPath.row])
         } else {
-            self.coordinator?.coordinateToChatWindowsWith()
+            let userModel = friendList[indexPath.row]
+            self.coordinator?.coordinateToChatWindowsWith(userModel: userModel)
         }
     }
 }
@@ -81,7 +105,8 @@ extension ChatThreadViewController: UITableViewDataSource {
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ChatThreadViewCell", for: indexPath)
-            cell.textLabel?.text = "Maria"
+            let user = friendList[indexPath.row]
+            cell.textLabel?.text = user.displayName
             cell.imageView?.image = UIImage(named: "img_onboard_fast")!
             return cell
         }
