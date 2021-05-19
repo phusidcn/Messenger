@@ -125,7 +125,7 @@ class SignUpViewController: UIViewController {
                         NetworkHandler.sharedNetworkHandler.sendLogin(with: signupUserModel) { data, response, error in
                             let json = JSON(data)
                             if let success = json["success"].bool, success == true {
-                                NetworkHandler.sharedNetworkHandler.token = json["data"][0].string
+                                NetworkHandler.sharedNetworkHandler.token = json["data"][0]["Token"].string
                                 DispatchQueue.main.async {
                                     self.coordinator?.coordinateToThreadChat()
                                 }

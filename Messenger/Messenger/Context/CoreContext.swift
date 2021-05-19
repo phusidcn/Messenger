@@ -9,6 +9,9 @@ import Foundation
 
 class CoreContext: NSObject {
     public static let shareCoreContext = CoreContext()
+    var userWaitingFriendShip: [UserModel] = []
+    var incommingMessage: [MessageModel] = []
+    var groupIncommingMessage: [MessageModel] = []
     
     var currentUser: UserModel?
     

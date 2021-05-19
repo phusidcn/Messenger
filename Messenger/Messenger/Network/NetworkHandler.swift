@@ -7,7 +7,7 @@
 
 import Foundation
 
-let hostAddress = "172.20.10.10"
+let hostAddress = "192.168.1.5"
 let hostPort = 8080
 
 class NetworkHandler: NSObject {
@@ -35,7 +35,7 @@ class NetworkHandler: NSObject {
         }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        let signupBody = "{\"Phone\": \"\(user.phoneNumber)\", \"Password\": \"\(user.password)\", \"Name\": \"\(user.name)\"}"
+        let signupBody = "{\"Phone\": \"\(user.phoneNumber)\", \"Password\": \"\(user.password!)\", \"Name\": \"\(user.name!)\"}"
         request.httpBody = signupBody.data(using: .utf8)
         
         URLSession.shared.dataTask(with: request) {data, response, error in
@@ -82,7 +82,7 @@ class NetworkHandler: NSObject {
         }.resume()
     }
     
-    func sendFriendListRequest(completion: ((Data?, URLResponse?, Error?) -> ())?) {
+    func sendGetFriendList(completion: ((Data?, URLResponse?, Error?) -> ())?) {
         var urlComponent = URLComponents()
         urlComponent.scheme = "http"
         urlComponent.host = hostAddress
@@ -99,6 +99,42 @@ class NetworkHandler: NSObject {
         URLSession.shared.dataTask(with: request) { data, response, error in
             completion?(data, response, error)
         }.resume()
+    }
+    
+    func sendGetCachedMessage(completion: ((Data?, URLResponse?, Error?) -> ())?) {
+        var urlComponent = URLComponents()
+        urlComponent.scheme = "http"
+        urlComponent.host = hostAddress
+        urlComponent.port = hostPort
+        urlComponent.path = "/ketchingMessage"
+        guard let url = urlComponent.url else {
+            print("failed url")
+            return
+        }
+        var request = URLRequest(url: url)
+        guard let token = NetworkHandler.sharedNetworkHandler.token else { return }
+        request.addValue(token, forHTTPHeaderField: "Authorization")
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            completion?(data, response, error)
+        }
+    }
+    
+    func sendGetWaitingFriendRequest(completion: ((Data?, URLResponse?, Error?) -> ())?) {
+        var urlComponent = URLComponents()
+        urlComponent.scheme = "http"
+        urlComponent.host = hostAddress
+        urlComponent.port = hostPort
+        urlComponent.path = ""
+        guard let url = urlComponent.url else {
+            print("failed url")
+            return
+        }
+        var request = URLRequest(url: url)
+        guard let token = NetworkHandler.sharedNetworkHandler.token else { return }
+        request.addValue(token, forHTTPHeaderField: "Authorization")
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            completion?(data, response, error)
+        }
     }
     
     func getToken() -> String? {

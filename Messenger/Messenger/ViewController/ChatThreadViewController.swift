@@ -44,11 +44,11 @@ class ChatThreadViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
-        NetworkHandler.sharedNetworkHandler.sendFriendListRequest() { data, response, error in
+        NetworkHandler.sharedNetworkHandler.sendGetFriendList() { data, response, error in
             let json = JSON(data)
             if let success = json["success"].bool, success == true {
-                guard let friendList = json["data"].array else { return }
-                for user in friendList {
+                guard let userList = json["data"].array else { return }
+                for user in userList {
                     guard let id = user["_id"].string else {
                         print("Error")
                         return
@@ -61,8 +61,16 @@ class ChatThreadViewController: UIViewController {
                         print("Error")
                         return
                     }
-                    let friend = UserModel(id: id, name: name, password: nil, phoneNumber: phone, avatarURL: nil)
-                    self.friendList.append(friend)
+                    var isAppear = false
+                    for friend in self.friendList {
+                        if friend.id == id {
+                            isAppear = true
+                        }
+                    }
+                    if !isAppear {
+                        let friend = UserModel(id: id, name: name, password: nil, phoneNumber: phone, avatarURL: nil)
+                        self.friendList.append(friend)
+                    }
                 }
                 DispatchQueue.main.async {
                     self.threadView.reloadData()
@@ -70,15 +78,30 @@ class ChatThreadViewController: UIViewController {
             }
         }
     }
+    
+    func isFriend(user: UserModel) -> Bool {
+        for friend in friendList {
+            if friend.id == user.id {
+                return true
+            }
+        }
+        return false
+    }
 }
 
 extension ChatThreadViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if false {
-            self.coordinator?.coordinateToFriendRequestWithUser(searchResultList[indexPath.row])
+        var user: UserModel
+        if let searchText = searchBar.text, searchText.count > 0 {
+            user = searchResultList[indexPath.row]
         } else {
+            user = friendList[indexPath.row]
+        }
+        if isFriend(user: user) {
             let userModel = friendList[indexPath.row]
             self.coordinator?.coordinateToChatWindowsWith(userModel: userModel)
+        } else {
+            self.coordinator?.coordinateToFriendRequestWithUser(searchResultList[indexPath.row])
         }
     }
 }

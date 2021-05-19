@@ -121,8 +121,8 @@ class LoginViewController: UIViewController {
     }
     
     @objc func tappedToSignUpButton(sender: UIButton) {
-        self.coordinator?.coordinateToThreadChat(withUserId: "")
-//        coordinator?.coordinateToSignUp()
+//        self.coordinator?.coordinateToThreadChat(withUserId: "")
+        coordinator?.coordinateToSignUp()
     }
     
     @objc func tappedToSignInButton(sender: UIButton){

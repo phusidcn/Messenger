@@ -81,14 +81,13 @@ class MessageViewController: ChatViewController {
         guard let currentUser = viewModel.currentUser else {
             return
         }
-
-        let message = MessageModel(id: UUID().uuidString, sendByID: currentUser.id,
+        
+        super.didPressSendButton(sender)
+        let receiverUser = viewModel.users[0]
+        let message = MessageModel(id: "\(Date().timeIntervalSince1970)", sendByID: currentUser.id, receivedID: receiverUser.id,
                               createdAt: Date(), text: chatBarView.textView.text)
         addMessage(message)
-        super.didPressSendButton(sender)
-        guard let text = message.text else { return }
-        let receiverUser = viewModel.users[0]
-        ChatSocket.sharedChatSocket.sendMessage(string: text, to: receiverUser,withCompletion: nil)
+        ChatSocket.sharedChatSocket.sendMessage(message: message, to: receiverUser, withCompletion: nil)
     }
 
     override func didPressGalleryButton(_ sender: Any?) {
@@ -258,9 +257,7 @@ extension MessageViewController {
 }
 
 extension MessageViewController: ChatSocketMessageDelegate {
-    func receivedMessage(text: String, from userId: String) {
-        var messageModel = MessageModel(id: "\(i)", sendByID: userId, createdAt: .distantPast, text: text)
-        messageModel.isOutgoing = messageModel.sendByID == viewModel.currentUser?.id ? true : false
-        addMessage(messageModel)
+    func receivedMessage(message: MessageModel) {
+        addMessage(message)
     }
 }

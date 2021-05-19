@@ -10,7 +10,7 @@ import Starscream
 import SwiftyJSON
 
 protocol ChatSocketMessageDelegate {
-    func receivedMessage(text: String, from userId: String)
+    func receivedMessage(message: MessageModel)
 }
 
 protocol FriendSocketDelegate {
@@ -46,8 +46,8 @@ class ChatSocket: NSObject {
         socket?.write(data: data, completion: completion)
     }
     
-    func sendMessage(string: String, to userModel: UserModel, withCompletion completion: (() -> ())?) {
-        let sendData = "{\"\(userModel.id)\":{\"code\": 202, \"message\": \"\(string)\"}}"
+    func sendMessage(message: MessageModel, to userModel: UserModel, withCompletion completion: (() -> ())?) {
+        let sendData = "{\"\(userModel.id)\":{\"code\": 202, \"message\": \"\(message.text)\", \"ts\": \"\(message.id)\"}}"
         socket?.write(string: sendData, completion: completion)
     }
     
@@ -56,25 +56,22 @@ class ChatSocket: NSObject {
         socket?.write(string: requestContent, completion: nil)
     }
     
+    func sendFriendshipResponse(to userId: String) {
+        let requestContent = ""
+        socket?.write(string: requestContent, completion: nil)
+    }
+    
     func handleReceivedMessage(text: String) {
         print(text)
         let json = JSON(parseJSON: text)
-        if let messageType = json["code"].int {
-            switch messageType {
-            case 205:
-                let senderId = json["Id"].string //Dafuq
-            case 203:
-                let senderId = json["senderId"].string
-            case 202:
-                guard let senderId = json["senderID"].string else { return }
-                guard let messageContent = json["message"].string else { return }
-                self.messengerDelegate?.receivedMessage(text: messageContent, from: senderId)
-            default:
-                print("Bug")
-            }
-        } else {
-            
-        }
+        guard let received = json.dictionary, let senderId = received.keys.first, let content = received.values.first else { return }
+        guard let code = content["code"].int, code == 202 else { return }
+        guard let text = content["message"].string else { return }
+        guard let ts = content["ts"].string else { return }
+        let messageModel = MessageModel(id: ts, sendByID: senderId, receivedID: CoreContext.shareCoreContext.userId, createdAt: Date(timeIntervalSince1970: TimeInterval(ts)!), text: text)
+        CoreDataHandler.shareCoreDataHandler.saveMessage(messageModel: messageModel)
+        self.messengerDelegate?.receivedMessage(message: messageModel)
+        
     }
 }
 

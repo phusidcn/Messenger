@@ -27,7 +27,9 @@ class LoginCoordinator: BaseCoordinator {
     }
     
     func coordinateToThreadChat(withUserId id: String) {
-        let chatThreadCoordinator = ChatThreadCoordinator(navigationController: navigationController)
-        coordinate(to: chatThreadCoordinator)
+//        let chatThreadCoordinator = ChatThreadCoordinator(navigationController: navigationController)
+//        coordinate(to: chatThreadCoordinator)
+        let tabBarCoordinator = TabBarCoordinator(navigationController: navigationController)
+        coordinate(to: tabBarCoordinator)
     }
 }
