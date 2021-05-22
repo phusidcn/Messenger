@@ -21,7 +21,7 @@ class RequestListCoordinator: BaseCoordinator {
         navigationController.pushViewController(viewController, animated: true)
     }
     
-    func coordinatorToResponseView(withUser user: UserModel) {
+    func coordinatorToResponseView(withUser user: FriendRequestModel) {
         let coordinator = ResponseRequestCoordinator(navigationController: navigationController, requestedUser: user)
         coordinator.start()
     }

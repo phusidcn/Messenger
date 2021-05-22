@@ -4,15 +4,23 @@
         <attribute name="content" optional="YES" attributeType="String"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="String"/>
-        <attribute name="receiveer_id" optional="YES" attributeType="String"/>
+        <attribute name="receiver_id" optional="YES" attributeType="String"/>
         <attribute name="sender_id" optional="YES" attributeType="String"/>
+        <relationship name="relationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Message"/>
     </entity>
     <entity name="Recommendation" representedClassName="Recommendation" syncable="YES" codeGenerationType="class">
         <attribute name="content" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="user_id" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="User" representedClassName="User" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="phone" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Message" positionX="-63" positionY="-18" width="128" height="104"/>
-        <element name="Recommendation" positionX="-63" positionY="18" width="128" height="59"/>
+        <element name="Message" positionX="-63" positionY="-18" width="128" height="133"/>
+        <element name="Recommendation" positionX="-63" positionY="18" width="128" height="74"/>
+        <element name="User" positionX="-63" positionY="18" width="128" height="74"/>
     </elements>
 </model>

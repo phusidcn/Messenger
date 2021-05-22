@@ -8,7 +8,7 @@
 import UIKit
 
 class TabBarController: UITabBarController {
-
+    var coordinator: TabBarCoordinator?
     override func viewDidLoad() {
         self.tabBar.layer.masksToBounds = true
         self.tabBar.barStyle = .black
@@ -20,8 +20,7 @@ class TabBarController: UITabBarController {
         self.tabBar.layer.shadowRadius = 10
         self.tabBar.layer.shadowOpacity = 1
         self.tabBar.layer.masksToBounds = false
+        self.view.backgroundColor = .white
     }
-    
-    var coordinator: TabBarCoordinator?
 
 }

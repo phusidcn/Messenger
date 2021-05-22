@@ -12,7 +12,7 @@ import SwiftyButton
 
 class ResponseRequestViewController: UIViewController {
     
-    var requestedUser: UserModel?
+    var requestedUser: FriendRequestModel?
     var coordinator: ResponseRequestCoordinator?
     let avatarImageView = UIImageView()
     let requestingUserNameView = UILabel()
@@ -28,6 +28,7 @@ class ResponseRequestViewController: UIViewController {
         self.view.addSubview(greetingView)
         self.view.addSubview(acceptButton)
         self.view.addSubview(deninedButton)
+        self.view.backgroundColor = .white
         
         avatarImageView.translatesAutoresizingMaskIntoConstraints = false
         requestingUserNameView.translatesAutoresizingMaskIntoConstraints = false
@@ -39,12 +40,13 @@ class ResponseRequestViewController: UIViewController {
         avatarImageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         avatarImageView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: self.view.frame.size.width / 4).isActive = true
         avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor).isActive = true
+        avatarImageView.image = UIImage(named: "img_icon_avatar")
         
         requestingUserNameView.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 30).isActive = true
         requestingUserNameView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         requestingUserNameView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
         requestingUserNameView.textAlignment = .center
-        requestingUserNameView.text = requestedUser?.displayName
+        requestingUserNameView.text = requestedUser?.userName
         
         greetingView.topAnchor.constraint(equalTo: requestingUserNameView.bottomAnchor, constant: 30).isActive = true
         greetingView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
@@ -54,6 +56,7 @@ class ResponseRequestViewController: UIViewController {
         acceptButton.topAnchor.constraint(equalTo: greetingView.bottomAnchor, constant: 30).isActive = true
         acceptButton.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
         acceptButton.trailingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: -20).isActive = true
+        acceptButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
         acceptButton.color = .systemBlue
         acceptButton.setTitle("Accept", for: .normal)
         acceptButton.addTarget(self, action: #selector(tappedToAcceptButton(sender:)), for: .touchUpInside)
@@ -61,13 +64,14 @@ class ResponseRequestViewController: UIViewController {
         deninedButton.topAnchor.constraint(equalTo: greetingView.bottomAnchor, constant: 30).isActive = true
         deninedButton.leadingAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 20).isActive = true
         deninedButton.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
+        deninedButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
         deninedButton.color = .systemRed
         deninedButton.setTitle("Deny", for: .normal)
         deninedButton.addTarget(self, action: #selector(tappedToDenyButton(sender:)), for: .touchUpInside)
     }
     
     @objc func tappedToAcceptButton(sender: UIButton) {
-        
+        ChatSocket.sharedChatSocket.sendFriendshipResponse(to: requestedUser!.userId, greetingMessage: greetingView.text!)
     }
     
     @objc func tappedToDenyButton(sender: UIButton) {

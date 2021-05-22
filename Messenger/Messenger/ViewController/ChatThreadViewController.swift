@@ -15,6 +15,7 @@ class ChatThreadViewController: UIViewController {
     var searchWorkItem: DispatchWorkItem?
     var searchResultList: [UserModel] = []
     var friendList: [UserModel] = []
+    var showList: [UserModel] = [UserModel(id: "0", name: "Nguyen Minh Tien", password: "qasd", phoneNumber: "0909090909")]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +45,10 @@ class ChatThreadViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
+        updateThreadChat()
+    }
+    
+    func updateThreadChat() {
         NetworkHandler.sharedNetworkHandler.sendGetFriendList() { data, response, error in
             let json = JSON(data)
             if let success = json["success"].bool, success == true {
@@ -61,16 +66,19 @@ class ChatThreadViewController: UIViewController {
                         print("Error")
                         return
                     }
+                    
                     var isAppear = false
-                    for friend in self.friendList {
+                    for friend in self.showList {
                         if friend.id == id {
                             isAppear = true
                         }
                     }
                     if !isAppear {
                         let friend = UserModel(id: id, name: name, password: nil, phoneNumber: phone, avatarURL: nil)
+                        self.showList.append(friend)
                         self.friendList.append(friend)
                     }
+                    
                 }
                 DispatchQueue.main.async {
                     self.threadView.reloadData()
@@ -87,21 +95,27 @@ class ChatThreadViewController: UIViewController {
         }
         return false
     }
+    
+    func isSearching() -> Bool {
+        guard let searchEntry = self.searchBar.text else { return false }
+        return searchEntry.count > 0
+    }
 }
 
 extension ChatThreadViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var user: UserModel
-        if let searchText = searchBar.text, searchText.count > 0 {
-            user = searchResultList[indexPath.row]
-        } else {
-            user = friendList[indexPath.row]
-        }
+//        if isSearching() {
+//            user = searchResultList[indexPath.row]
+//        } else {
+//            user = friendList[indexPath.row]
+//        }
+        user = showList[indexPath.row]
         if isFriend(user: user) {
-            let userModel = friendList[indexPath.row]
-            self.coordinator?.coordinateToChatWindowsWith(userModel: userModel)
+//            let userModel = user[indexPath.row]
+            self.coordinator?.coordinateToChatWindowsWith(userModel: friendList[indexPath.row])
         } else {
-            self.coordinator?.coordinateToFriendRequestWithUser(searchResultList[indexPath.row])
+            self.coordinator?.coordinateToFriendRequestWithUser(user)
         }
     }
 }
@@ -112,27 +126,33 @@ extension ChatThreadViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let searchEntry = self.searchBar.text, searchEntry.count > 0 {
-            return self.searchResultList.count
-        } else {
-            return self.friendList.count
-        }
+//        if isSearching() {
+//            return self.searchResultList.count
+//        } else {
+//            return self.friendList.count
+//        }
+        return showList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let searchEntry = searchBar.text, searchEntry.count > 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ChatThreadViewCell", for: indexPath)
-            let result = searchResultList[indexPath.row]
-            cell.textLabel?.text = result.displayName
-            cell.imageView?.image = UIImage(named: "img_onboard_fast")
-            return cell
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ChatThreadViewCell", for: indexPath)
-            let user = friendList[indexPath.row]
-            cell.textLabel?.text = user.displayName
-            cell.imageView?.image = UIImage(named: "img_onboard_fast")!
-            return cell
-        }
+//        if isSearching() {
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "ChatThreadViewCell", for: indexPath)
+//            let result = searchResultList[indexPath.row]
+//            cell.textLabel?.text = result.displayName
+//            cell.imageView?.image = UIImage(named: "img_onboard_fast")
+//            return cell
+//        } else {
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "ChatThreadViewCell", for: indexPath)
+//            let user = friendList[indexPath.row]
+//            cell.textLabel?.text = user.displayName
+//            cell.imageView?.image = UIImage(named: "img_onboard_fast")!
+//            return cell
+//        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ChatThreadViewCell", for: indexPath)
+        let user = showList[indexPath.row]
+        cell.textLabel?.text = user.displayName
+        cell.imageView?.image = UIImage(named: "img_icon_avatar")
+        return cell
     }
 }
 
@@ -146,6 +166,7 @@ extension ChatThreadViewController: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        showList.removeAll()
         guard let searchEntry = searchBar.text else { return }
         self.searchWorkItem?.cancel()
         self.searchWorkItem = DispatchWorkItem() {
@@ -153,7 +174,7 @@ extension ChatThreadViewController: UISearchBarDelegate {
                 for user in self.friendList {
                     let phone = user.phoneNumber
                     if phone.contains(searchEntry) {
-                        self.searchResultList.append(user)
+                        self.showList.append(user)
                     }
                 }
                 DispatchQueue.main.async {
@@ -166,7 +187,7 @@ extension ChatThreadViewController: UISearchBarDelegate {
                         guard let friendList = json["data"].array else { return}
                         for json in friendList {
                             let user = UserModel(id: json["_id"].string, name: json["Name"].string, password: nil, phoneNumber: searchEntry, avatarURL: nil)
-                            self.searchResultList.append(user)
+                            self.showList.append(user)
                         }
                         DispatchQueue.main.async {
                             self.threadView.reloadData()

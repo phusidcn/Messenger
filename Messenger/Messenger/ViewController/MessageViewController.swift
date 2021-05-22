@@ -14,7 +14,6 @@ class MessageViewController: ChatViewController {
     var imagePickerHelper: ImagePickerHelper?
     var numberUserTypings = 0
     var coordinator: MessageViewCoordinator?
-    let i = 10
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,18 +49,20 @@ class MessageViewController: ChatViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var message = viewModel.messages[indexPath.row]
-        let cellIdentifer = message.cellIdentifer()
-        let user = viewModel.getUserFromID(message.sendByID)
+        let cellIdentifer = viewModel.messages[indexPath.row].cellIdentifer()
+        let user = viewModel.getUserFromID(viewModel.messages[indexPath.row].sendByID)
+        if let mid = viewModel.currentUser?.id, mid == viewModel.messages[indexPath.row].sendByID {
+            viewModel.messages[indexPath.row].isOutgoing = true
+        } else {
+            viewModel.messages[indexPath.row].isOutgoing = false
+        }
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifer, for: indexPath) as! MessageCell
         let positionInBlock = viewModel.getPositionInBlockForMessageAtIndex(indexPath.row)
 
         cell.transform = tableView.transform
-        cell.bind(withMessage: viewModel.messages[indexPath.row], user: user)
-        message.isOutgoing = message.sendByID == viewModel.currentUser?.id ? true : false
-        cell.updateUIWithBubbleStyle(viewModel.bubbleStyle, isOutgoingMessage: message.isOutgoing)
+        cell.updateUIWithBubbleStyle(viewModel.bubbleStyle, isOutgoingMessage: viewModel.messages[indexPath.row].isOutgoing)
         cell.updateLayoutForBubbleStyle(viewModel.bubbleStyle, positionInBlock: positionInBlock)
-
+        cell.bind(withMessage: viewModel.messages[indexPath.row], user: user)
         return cell
     }
 
@@ -81,13 +82,13 @@ class MessageViewController: ChatViewController {
         guard let currentUser = viewModel.currentUser else {
             return
         }
-        
-        super.didPressSendButton(sender)
         let receiverUser = viewModel.users[0]
         let message = MessageModel(id: "\(Date().timeIntervalSince1970)", sendByID: currentUser.id, receivedID: receiverUser.id,
                               createdAt: Date(), text: chatBarView.textView.text)
         addMessage(message)
+        super.didPressSendButton(sender)
         ChatSocket.sharedChatSocket.sendMessage(message: message, to: receiverUser, withCompletion: nil)
+        CoreDataHandler.shareCoreDataHandler.saveMessage(messageModel: message)
     }
 
     override func didPressGalleryButton(_ sender: Any?) {
@@ -258,6 +259,9 @@ extension MessageViewController {
 
 extension MessageViewController: ChatSocketMessageDelegate {
     func receivedMessage(message: MessageModel) {
-        addMessage(message)
+        if message.receivedID == viewModel.currentUser?.id {
+            addMessage(message)
+        }
+        CoreDataHandler.shareCoreDataHandler.saveMessage(messageModel: message)
     }
 }

@@ -5,6 +5,7 @@
 //  Created by huynhlamphusi on 4/22/21.
 //
 
+
 import UIKit
 import SwiftyButton
 import SwiftyJSON
@@ -85,6 +86,12 @@ class LoginViewController: UIViewController {
         signupButton.color = .systemPink
         signupButton.setTitle("Sign up", for: .normal)
         signupButton.addTarget(self, action: #selector(tappedToSignUpButton(sender:)), for: .touchUpInside)
+    }
+    
+    func loadLocalMessage() {
+        DispatchQueue.global(qos: .default).async {
+            CoreDataHandler.shareCoreDataHandler.getThreadChatData()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

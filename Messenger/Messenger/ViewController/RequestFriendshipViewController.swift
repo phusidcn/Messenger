@@ -36,6 +36,7 @@ class RequestFriendshipViewController: UIViewController {
         imageView.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         imageView.widthAnchor.constraint(equalToConstant: self.view.frame.size.width / 2).isActive = true
         imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor).isActive = true
+        imageView.image = UIImage(named: "img_icon_avatar")
         
         nameView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 30).isActive = true
         nameView.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor).isActive = true
@@ -52,7 +53,8 @@ class RequestFriendshipViewController: UIViewController {
         
         requestButton.topAnchor.constraint(equalTo: greetingField.bottomAnchor, constant: 30).isActive = true
         requestButton.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        requestButton.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 30).isActive = true
+        requestButton.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 70).isActive = true
+        requestButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
         requestButton.color = .systemBlue
         requestButton.setTitle("Send friend request", for: .normal)
         requestButton.addTarget(self, action: #selector(tappedToSendRequest(_:)), for: .touchUpInside)
@@ -61,5 +63,6 @@ class RequestFriendshipViewController: UIViewController {
     @objc func tappedToSendRequest(_ sender: UIButton) {
         guard let userId = self.userModel?.id else { return }
         ChatSocket.sharedChatSocket.sendFriendshipRequest(to: userId, greetingMessage: "Hello, I want to make friend with you")
+        self.navigationController?.dismiss(animated: true, completion: nil)
     }
 }

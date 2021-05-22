@@ -18,6 +18,7 @@ class RequestFriendshipCoordinator: BaseCoordinator {
     
     func start() {
         let viewController = RequestFriendshipViewController()
+        viewController.hidesBottomBarWhenPushed = true
         viewController.userModel = userInfo
         viewController.coordinator = self
         self.navigationController.pushViewController(viewController, animated: true)

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5309200926478A2300A1C5EE /* CoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5309200826478A2300A1C5EE /* CoreDataHandler.swift */; };
+		531DAC102658059C0095ECF0 /* FriendRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531DAC0F2658059C0095ECF0 /* FriendRequestModel.swift */; };
 		532E25F22653D03D009420A6 /* ResponseRequestCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532E25F12653D03D009420A6 /* ResponseRequestCoordinator.swift */; };
 		532E25F42653D7F4009420A6 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532E25F32653D7F4009420A6 /* TabBarController.swift */; };
 		5335DB4F2650433500B1E0CD /* RequestFriendshipCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5335DB4E2650433500B1E0CD /* RequestFriendshipCoordinator.swift */; };
@@ -89,6 +90,7 @@
 		2C837059C975794B39F68A24 /* Pods-Messenger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Messenger.release.xcconfig"; path = "Target Support Files/Pods-Messenger/Pods-Messenger.release.xcconfig"; sourceTree = "<group>"; };
 		50DBA671CE3BCD6438651EA4 /* Pods-Messenger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Messenger.debug.xcconfig"; path = "Target Support Files/Pods-Messenger/Pods-Messenger.debug.xcconfig"; sourceTree = "<group>"; };
 		5309200826478A2300A1C5EE /* CoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHandler.swift; sourceTree = "<group>"; };
+		531DAC0F2658059C0095ECF0 /* FriendRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestModel.swift; sourceTree = "<group>"; };
 		532E25F12653D03D009420A6 /* ResponseRequestCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseRequestCoordinator.swift; sourceTree = "<group>"; };
 		532E25F32653D7F4009420A6 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		5335DB4E2650433500B1E0CD /* RequestFriendshipCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFriendshipCoordinator.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				53947008263FF4B000014E57 /* ListResponseObject.swift */,
 				5394700A263FF4CD00014E57 /* ChatBarType.swift */,
 				5394700C263FF4E900014E57 /* ImagePickerType.swift */,
+				531DAC0F2658059C0095ECF0 /* FriendRequestModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -311,8 +314,8 @@
 			children = (
 				536EE343262E064000EECB3F /* OnboardViewController.swift */,
 				5347DAD92631DF80001CBC1E /* LoginViewController.swift */,
-				53E1E8622635472C009BAC13 /* SignUpViewController.swift */,
 				53E92E272637C0F30004607A /* ChatThreadViewController.swift */,
+				53E1E8622635472C009BAC13 /* SignUpViewController.swift */,
 				53C39D2E263D07E200272753 /* MessageViewController.swift */,
 				539B308F2641942B00B45232 /* RequestFriendshipViewController.swift */,
 				53A785282650E20000212933 /* ResponseRequestViewController.swift */,
@@ -679,6 +682,7 @@
 				5309200926478A2300A1C5EE /* CoreDataHandler.swift in Sources */,
 				53E92E282637C0F30004607A /* ChatThreadViewController.swift in Sources */,
 				53947007263FF46E00014E57 /* Pagination.swift in Sources */,
+				531DAC102658059C0095ECF0 /* FriendRequestModel.swift in Sources */,
 				53D0D9532646A882009FBBE1 /* ChatSocket.swift in Sources */,
 				5394701C263FFA7600014E57 /* UIBezierPath.swift in Sources */,
 				532E25F22653D03D009420A6 /* ResponseRequestCoordinator.swift in Sources */,

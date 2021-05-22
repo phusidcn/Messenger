@@ -36,6 +36,7 @@ class ChatSocket: NSObject {
         socket = WebSocket(request: request)
         socket?.delegate = self
         self.socket?.connect()
+        self.socket?.write(ping: "data".data(using: .utf8)!)
     }
     
     func disconnect() {
@@ -47,8 +48,10 @@ class ChatSocket: NSObject {
     }
     
     func sendMessage(message: MessageModel, to userModel: UserModel, withCompletion completion: (() -> ())?) {
-        let sendData = "{\"\(userModel.id)\":{\"code\": 202, \"message\": \"\(message.text)\", \"ts\": \"\(message.id)\"}}"
-        socket?.write(string: sendData, completion: completion)
+        let sendData = "{\"\(userModel.id)\":{\"code\": 202, \"message\": \"\(message.text!)\", \"ts\": \"\(message.id!)\"}}"
+        socket?.write(string: sendData, completion: {
+            print("Sended")
+        })
     }
     
     func sendFriendshipRequest(to userId: String, greetingMessage message: String) {
@@ -56,8 +59,8 @@ class ChatSocket: NSObject {
         socket?.write(string: requestContent, completion: nil)
     }
     
-    func sendFriendshipResponse(to userId: String) {
-        let requestContent = ""
+    func sendFriendshipResponse(to userId: String, greetingMessage: String) {
+        let requestContent = "{\"\(userId)\":{\"code\":205, \"message\":\"\(greetingMessage)\"}}"
         socket?.write(string: requestContent, completion: nil)
     }
     

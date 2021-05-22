@@ -185,7 +185,8 @@ class MessageCell: UITableViewCell {
             layoutForOutgoingMessage()
             contentTranform = CGAffineTransform(scaleX: -1, y: -1)
             statusLabel.textAlignment = .right
-        } else {
+        }
+        if !isOutgoingMessage {
             layoutForIncomingMessage()
             contentTranform = CGAffineTransform(scaleX: 1, y: -1)
             statusLabel.textAlignment = .left

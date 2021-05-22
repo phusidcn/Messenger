@@ -27,7 +27,7 @@ struct UserModel: Userable, Decodable {
         }
     }
 
-    init(id: String? = nil, name: String?, password: String?, phoneNumber: String, avatarURL: URL? = nil) {
+    init(id: String? = nil, name: String?, password: String?, phoneNumber: String, avatarURL: URL? = URL(string: "https://i.imgur.com/LIe72Gc.png")) {
         self.id = id ?? ""
         self.name = name
         self.phoneNumber = phoneNumber

@@ -7,7 +7,7 @@
 
 import Foundation
 
-let hostAddress = "192.168.1.5"
+let hostAddress = "192.168.11.50"
 let hostPort = 8080
 
 class NetworkHandler: NSObject {
@@ -116,7 +116,11 @@ class NetworkHandler: NSObject {
         request.addValue(token, forHTTPHeaderField: "Authorization")
         URLSession.shared.dataTask(with: request) { data, response, error in
             completion?(data, response, error)
-        }
+        }.resume()
+    }
+    
+    func sendAcceptRequest(completion: ((Data?, URLResponse?, Error?) -> ())?) {
+        
     }
     
     func sendGetWaitingFriendRequest(completion: ((Data?, URLResponse?, Error?) -> ())?) {
@@ -124,7 +128,7 @@ class NetworkHandler: NSObject {
         urlComponent.scheme = "http"
         urlComponent.host = hostAddress
         urlComponent.port = hostPort
-        urlComponent.path = ""
+        urlComponent.path = "/ketchingRequestFriend"
         guard let url = urlComponent.url else {
             print("failed url")
             return
@@ -134,7 +138,7 @@ class NetworkHandler: NSObject {
         request.addValue(token, forHTTPHeaderField: "Authorization")
         URLSession.shared.dataTask(with: request) { data, response, error in
             completion?(data, response, error)
-        }
+        }.resume()
     }
     
     func getToken() -> String? {
