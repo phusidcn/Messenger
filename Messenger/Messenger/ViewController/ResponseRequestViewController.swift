@@ -71,10 +71,17 @@ class ResponseRequestViewController: UIViewController {
     }
     
     @objc func tappedToAcceptButton(sender: UIButton) {
+        //---Log---
+        let log = TrackingModel(labelControl: "Accept friendship", event: "touchUpInside", timestamp: Date().timeIntervalSince1970)
+        TrackingFlowManager.sharedTrackingFlowManager.addTrackingLog(log)
+        //---Log---
         ChatSocket.sharedChatSocket.sendFriendshipResponse(to: requestedUser!.userId, greetingMessage: greetingView.text!)
     }
     
     @objc func tappedToDenyButton(sender: UIButton) {
-        
+        //---Log---
+        let log = TrackingModel(labelControl: "Denied friendship", event: "touchUpInside", timestamp: Date().timeIntervalSince1970)
+        TrackingFlowManager.sharedTrackingFlowManager.addTrackingLog(log)
+        //---Log---
     }
 }

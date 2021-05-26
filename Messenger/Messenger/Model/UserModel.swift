@@ -14,6 +14,7 @@ struct UserModel: Userable, Decodable {
     let avatarURL: URL?
     let phoneNumber: String
     let password: String?
+    let birthDay: String?
 
     var idNumber: String {
         get {
@@ -27,12 +28,13 @@ struct UserModel: Userable, Decodable {
         }
     }
 
-    init(id: String? = nil, name: String?, password: String?, phoneNumber: String, avatarURL: URL? = URL(string: "https://i.imgur.com/LIe72Gc.png")) {
+    init(id: String? = nil, name: String?, password: String?, phoneNumber: String, birthDay: String?, avatarURL: URL? = URL(string: "https://i.imgur.com/LIe72Gc.png")) {
         self.id = id ?? ""
         self.name = name
         self.phoneNumber = phoneNumber
         self.password = password
         self.avatarURL = avatarURL
+        self.birthDay = birthDay
     }
     
     private enum CodingKeys: String, CodingKey {
@@ -40,6 +42,7 @@ struct UserModel: Userable, Decodable {
         case name
         case phoneNumber
         case password
+        case birthDay
         case avatarURL = "avatar_url"
     }
 }

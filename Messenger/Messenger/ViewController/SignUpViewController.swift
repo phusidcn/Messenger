@@ -18,8 +18,10 @@ class SignUpViewController: UIViewController {
     let phoneField = UITextField()
     let passwordField = UITextField()
     let repasswordField = UITextField()
+    let birthDayPicker = UITextField()
     let registerButton = FlatButton()
     let scrollView = UIScrollView()
+    let datePicker = UIDatePicker()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +38,7 @@ class SignUpViewController: UIViewController {
         contentView.addSubview(passwordField)
         contentView.addSubview(repasswordField)
         contentView.addSubview(registerButton)
+        contentView.addSubview(birthDayPicker)
         self.scrollView.addSubview(contentView)
         
         self.scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -85,15 +88,21 @@ class SignUpViewController: UIViewController {
         repasswordField.isSecureTextEntry = true
         repasswordField.placeholder = " Re enter password"
         
+        birthDayPicker.translatesAutoresizingMaskIntoConstraints = false
+        birthDayPicker.topAnchor.constraint(equalTo: repasswordField.bottomAnchor, constant: 30).isActive = true
+        birthDayPicker.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 20).isActive = true
+        birthDayPicker.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
+        birthDayPicker.placeholder = "Birthday"
         
         registerButton.translatesAutoresizingMaskIntoConstraints = false
-        registerButton.topAnchor.constraint(equalTo: repasswordField.bottomAnchor, constant: 30).isActive = true
+        registerButton.topAnchor.constraint(equalTo: birthDayPicker.bottomAnchor, constant: 30).isActive = true
         registerButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
         registerButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20).isActive = true
         registerButton.heightAnchor.constraint(equalToConstant: 45).isActive = true
         registerButton.color = .systemBlue
         registerButton.setTitle("Register", for: .normal)
         registerButton.addTarget(self, action: #selector(tappedToRegisterButton(sender:)), for: .touchUpInside)
+        showDatePicker()
     }
     
     deinit {
@@ -112,12 +121,43 @@ class SignUpViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardDidHideNotification, object: nil)
     }
     
+    func showDatePicker(){
+        //Formate Date
+        datePicker.datePickerMode = .date
+
+       //ToolBar
+       let toolbar = UIToolbar();
+        toolbar.backgroundColor = .white
+       toolbar.sizeToFit()
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(donedatePicker));
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker));
+
+        toolbar.setItems([doneButton,spaceButton,cancelButton], animated: false)
+
+        birthDayPicker.inputAccessoryView = toolbar
+        birthDayPicker.inputView = datePicker
+     }
+    
+    @objc func donedatePicker(){
+
+       let formatter = DateFormatter()
+       formatter.dateFormat = "dd/MM/yyyy"
+       birthDayPicker.text = formatter.string(from: datePicker.date)
+       self.view.endEditing(true)
+     }
+
+     @objc func cancelDatePicker(){
+        self.view.endEditing(true)
+      }
+    
     @objc func tappedToRegisterButton(sender: Any) {
         if let password = self.passwordField.text,
            let phone = self.phoneField.text,
            let username = self.userNameField.text,
-           passwordField.text == repasswordField.text {
-            let signupUserModel = UserModel(name: username, password: password, phoneNumber: phone)
+           passwordField.text == repasswordField.text,
+           let birthDay = self.birthDayPicker.text {
+            let signupUserModel = UserModel(name: username, password: password, phoneNumber: phone, birthDay: birthDay)
             NetworkHandler.sharedNetworkHandler.sendSignup(with: signupUserModel) {data, response, handler in
                 do {
                     let json = JSON(data)

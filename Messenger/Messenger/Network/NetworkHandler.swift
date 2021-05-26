@@ -7,7 +7,7 @@
 
 import Foundation
 
-let hostAddress = "192.168.11.50"
+let hostAddress = "192.168.1.4"
 let hostPort = 8080
 
 class NetworkHandler: NSObject {
@@ -35,7 +35,7 @@ class NetworkHandler: NSObject {
         }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        let signupBody = "{\"Phone\": \"\(user.phoneNumber)\", \"Password\": \"\(user.password!)\", \"Name\": \"\(user.name!)\"}"
+        let signupBody = "{\"Phone\": \"\(user.phoneNumber)\", \"Password\": \"\(user.password!)\", \"Name\": \"\(user.name!)\", \"BDate\":\"\(user.birthDay!)\"}"
         request.httpBody = signupBody.data(using: .utf8)
         
         URLSession.shared.dataTask(with: request) {data, response, error in
@@ -139,6 +139,83 @@ class NetworkHandler: NSObject {
         URLSession.shared.dataTask(with: request) { data, response, error in
             completion?(data, response, error)
         }.resume()
+    }
+    
+    func sendTrackingInfo(_ info: String, completion:((Data?, URLResponse?, Error?) -> ())?) {
+        var urlComponent = URLComponents()
+        urlComponent.scheme = "http"
+        urlComponent.host = hostAddress
+        urlComponent.port = hostPort
+        urlComponent.path = "/trackingBehavior"
+        guard let url = urlComponent.url else {
+            print("failed url")
+            return
+        }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        guard let token = NetworkHandler.sharedNetworkHandler.token else { return }
+        request.addValue(token, forHTTPHeaderField: "Authorization")
+        request.httpBody = info.data(using: .utf8)
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            completion?(data, response, error)
+        }.resume()
+    }
+    
+    func sendGetBannerRequest(completion:((Data?, URLResponse?, Error?) -> ())?) {
+        var urlComponent = URLComponents()
+        urlComponent.scheme = "http"
+        urlComponent.host = hostAddress
+        urlComponent.port = hostPort
+        urlComponent.path = "/recommend"
+        guard let url = urlComponent.url else {
+            print("failed url")
+            return
+        }
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        guard let token = NetworkHandler.sharedNetworkHandler.token else { return }
+        request.addValue(token, forHTTPHeaderField: "Authorization")
+        URLSession.shared.dataTask(with: request) {data, response, error in
+            completion?(data, response, error)
+        }.resume()
+    }
+    
+    func sendUserDismissBanner(completion: ((Data?, URLResponse?, Error?) -> ())?) {
+        var urlComponent = URLComponents()
+        urlComponent.scheme = "http"
+        urlComponent.host = hostAddress
+        urlComponent.port = hostPort
+        urlComponent.path = "/recommend"
+        guard let url = urlComponent.url else {
+            print("failed url")
+            return
+        }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        guard let token = NetworkHandler.sharedNetworkHandler.token else { return }
+        request.addValue(token, forHTTPHeaderField: "Authorization")
+        guard let id = CoreContext.shareCoreContext.bannerId else { return }
+        request.httpBody = "{\"id\":\"\(id)\"}".data(using: .utf8)
+        URLSession.shared.dataTask(with: request) {data, response, error in
+            completion?(data, response, error)
+        }.resume()
+    }
+    
+    func sendLogout(completion: ((Data?, URLResponse?, Error?) -> ())?) {
+        var urlComponent = URLComponents()
+        urlComponent.scheme = "http"
+        urlComponent.host = hostAddress
+        urlComponent.port = hostPort
+        urlComponent.path = "/recommend"
+        guard let url = urlComponent.url else {
+            print("failed url")
+            return
+        }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        guard let token = NetworkHandler.sharedNetworkHandler.token else { return }
+        request.addValue(token, forHTTPHeaderField: "Authorization")
+        URLSession.shared.dataTask(with: request).resume()
     }
     
     func getToken() -> String? {

@@ -21,11 +21,11 @@ class TabBarCoordinator: BaseCoordinator {
         
         let chatNavigationController = UINavigationController()
 
-        chatNavigationController.tabBarItem = UITabBarItem(title: "Message", image: messageIcon, tag: 0)
+        chatNavigationController.tabBarItem = UITabBarItem(title: "Message", image: UIImage(named: "img_icon_message"), tag: 0)
         let chatCoordinator = ChatThreadCoordinator(navigationController: chatNavigationController)
         
         let friendNavigationController = UINavigationController()
-        friendNavigationController.tabBarItem = UITabBarItem(title: "Friend request", image: groupIcon, tag: 1)
+        friendNavigationController.tabBarItem = UITabBarItem(title: "Friend request", image: UIImage(named: "img_icon_group"), tag: 1)
         let friendCoordinator = RequestListCoordinator(navigationController: friendNavigationController)
         
         tabBarController.viewControllers = [chatNavigationController, friendNavigationController]

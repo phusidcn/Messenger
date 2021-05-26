@@ -134,7 +134,7 @@ class LoginViewController: UIViewController {
     
     @objc func tappedToSignInButton(sender: UIButton){
         if let phoneNumber = self.phoneNumberField.text, let password = self.passwordField.text {
-            let userModel = UserModel(name: "", password: password, phoneNumber: phoneNumber)
+            let userModel = UserModel(name: "", password: password, phoneNumber: phoneNumber, birthDay: nil)
             NetworkHandler.sharedNetworkHandler.sendLogin(with: userModel) { data, response, error in
                 let json = JSON(data)
                 if let success = json["success"].bool, success == true {
@@ -143,7 +143,7 @@ class LoginViewController: UIViewController {
                     let name = json["data"][0]["Name"].string ?? ""
                     let phone = json["data"][0]["Phone"].string ?? ""
                     let password = json["data"][0]["Password"].string ?? ""
-                    let userModel = UserModel(id: id, name: name, password: password, phoneNumber: phone)
+                    let userModel = UserModel(id: id, name: name, password: password, phoneNumber: phone, birthDay: nil)
                     CoreContext.shareCoreContext.loginByUser(user: userModel)
                     DispatchQueue.main.async {
                         self.coordinator?.coordinateToThreadChat(withUserId: id)

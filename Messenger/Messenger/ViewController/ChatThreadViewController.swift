@@ -15,7 +15,9 @@ class ChatThreadViewController: UIViewController {
     var searchWorkItem: DispatchWorkItem?
     var searchResultList: [UserModel] = []
     var friendList: [UserModel] = []
-    var showList: [UserModel] = [UserModel(id: "0", name: "Nguyen Minh Tien", password: "qasd", phoneNumber: "0909090909")]
+    var showList: [UserModel] = []
+    var bannerModel: BannerModel?
+    var dismissedBanner: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,13 +41,40 @@ class ChatThreadViewController: UIViewController {
         threadView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         threadView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         threadView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        //---Log---
+        let log = TrackingModel(labelControl: "Login Button", event: "touchUpInside", timestamp: (Date().timeIntervalSince1970))
+        TrackingFlowManager.sharedTrackingFlowManager.addTrackingLog(log)
+        //---Log---
         ChatSocket.sharedChatSocket.connect()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.isHidden = true
+        //self.navigationController?.navigationBar.isHidden = true
+        self.navigationItem.setHidesBackButton(true, animated: true)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Logout", style: .done, target: self, action: #selector(tappedToLogoutButton(_:)))
+        getBannerContent()
         updateThreadChat()
+    }
+    
+    func getBannerContent() {
+        NetworkHandler.sharedNetworkHandler.sendGetBannerRequest() { data, response, error in
+            let json = JSON(data)
+            if let success = json["success"].bool, success == true {
+                guard let items = json["data"].array else { return }
+                for item in items {
+                    guard let code = item["code"].int, code == 300 else { return }
+                    guard let success = item["success"].bool, success == false else { return }
+                    guard let message = item["message"].string else { return }
+                    guard let id = item["id"].string else { return }
+                    CoreContext.shareCoreContext.bannerId = id
+                    self.bannerModel = BannerModel(content: message, timeStamp: "\(Date().timeIntervalSince1970)")
+                }
+                DispatchQueue.main.async {
+                    self.threadView.reloadData()
+                }
+            }
+        }
     }
     
     func updateThreadChat() {
@@ -74,7 +103,7 @@ class ChatThreadViewController: UIViewController {
                         }
                     }
                     if !isAppear {
-                        let friend = UserModel(id: id, name: name, password: nil, phoneNumber: phone, avatarURL: nil)
+                        let friend = UserModel(id: id, name: name, password: nil, phoneNumber: phone, birthDay: nil, avatarURL: nil)
                         self.showList.append(friend)
                         self.friendList.append(friend)
                     }
@@ -100,21 +129,50 @@ class ChatThreadViewController: UIViewController {
         guard let searchEntry = self.searchBar.text else { return false }
         return searchEntry.count > 0
     }
+    
+    @objc func tappedToLogoutButton(_ sender: Any?) {
+        //---Log---
+        let log = TrackingModel(labelControl: "Logout Button", event: "touchUpInside", timestamp: Date().timeIntervalSince1970)
+        TrackingFlowManager.sharedTrackingFlowManager.addTrackingLog(log)
+        //---Log---
+        NetworkHandler.sharedNetworkHandler.sendLogout(completion: nil)
+        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+    }
 }
 
 extension ChatThreadViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var user: UserModel
-//        if isSearching() {
-//            user = searchResultList[indexPath.row]
-//        } else {
-//            user = friendList[indexPath.row]
-//        }
-        user = showList[indexPath.row]
+        if self.bannerModel != nil, !self.dismissedBanner {
+            if indexPath.row == 0 {
+                self.dismissedBanner = true
+                //---Log---
+                let log = TrackingModel(labelControl: "Banner", event: "touchUpInside", timestamp: Date().timeIntervalSince1970)
+                TrackingFlowManager.sharedTrackingFlowManager.addTrackingLog(log)
+                //---Log---
+                NetworkHandler.sharedNetworkHandler.sendUserDismissBanner() { data, response, error in
+                    //print("Data: \(data ?? Data()) - Response: \(response ?? URLResponse()) - Error: \(error ?? E)")
+                }
+                tableView.reloadData()
+                return
+            } else {
+                user = showList[indexPath.row - 1]
+            }
+        } else {
+            user = showList[indexPath.row]
+        }
         if isFriend(user: user) {
 //            let userModel = user[indexPath.row]
-            self.coordinator?.coordinateToChatWindowsWith(userModel: friendList[indexPath.row])
+            //---Log---
+            let log = TrackingModel(labelControl: "\(user.id)", event: "touchUpInside", timestamp: Date().timeIntervalSince1970)
+            TrackingFlowManager.sharedTrackingFlowManager.addTrackingLog(log)
+            //---Log---
+            self.coordinator?.coordinateToChatWindowsWith(userModel: user)
         } else {
+            //---Log---
+            let log = TrackingModel(labelControl: "\(user.id)", event: "touchUpInside", timestamp: Date().timeIntervalSince1970)
+            TrackingFlowManager.sharedTrackingFlowManager.addTrackingLog(log)
+            //---Log---
             self.coordinator?.coordinateToFriendRequestWithUser(user)
         }
     }
@@ -126,12 +184,17 @@ extension ChatThreadViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if isSearching() {
-//            return self.searchResultList.count
-//        } else {
-//            return self.friendList.count
-//        }
-        return showList.count
+        let bannerCount = (self.bannerModel != nil && !self.dismissedBanner) ? 1 : 0
+        return showList.count + bannerCount
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if let bannerModel = self.bannerModel, !self.dismissedBanner, indexPath.row == 0 {
+            let attributedString = NSAttributedString(string: bannerModel.content)
+            return attributedString.height(containerWidth: tableView.contentSize.width - 300)
+        } else {
+            return 50
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -148,11 +211,27 @@ extension ChatThreadViewController: UITableViewDataSource {
 //            cell.imageView?.image = UIImage(named: "img_onboard_fast")!
 //            return cell
 //        }
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ChatThreadViewCell", for: indexPath)
-        let user = showList[indexPath.row]
-        cell.textLabel?.text = user.displayName
-        cell.imageView?.image = UIImage(named: "img_icon_avatar")
-        return cell
+        if let banner = self.bannerModel, !self.dismissedBanner {
+            if indexPath.row == 0 {
+                let cell = BannerViewCell()
+                cell.textLabel?.attributedText = NSAttributedString(string: banner.content, attributes: nil)
+                cell.imageView?.image = UIImage(named: "img_icon_attention")
+                cell.textLabel?.numberOfLines = 0
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "ChatThreadViewCell", for: indexPath)
+                let user = showList[indexPath.row - 1]
+                cell.textLabel?.text = user.displayName
+                cell.imageView?.image = UIImage(named: "img_icon_avatar")
+                return cell
+            }
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ChatThreadViewCell", for: indexPath)
+            let user = showList[indexPath.row]
+            cell.textLabel?.text = user.displayName
+            cell.imageView?.image = UIImage(named: "img_icon_avatar")
+            return cell
+        }
     }
 }
 
@@ -171,6 +250,8 @@ extension ChatThreadViewController: UISearchBarDelegate {
         self.searchWorkItem?.cancel()
         self.searchWorkItem = DispatchWorkItem() {
             if searchEntry.count < 9 {
+                let log = TrackingModel(labelControl: "SearchBox", event: "Search", note: searchEntry, timestamp: Date().timeIntervalSince1970)
+                TrackingFlowManager.sharedTrackingFlowManager.addTrackingLog(log)
                 for user in self.friendList {
                     let phone = user.phoneNumber
                     if phone.contains(searchEntry) {
@@ -181,12 +262,14 @@ extension ChatThreadViewController: UISearchBarDelegate {
                     self.threadView.reloadData()
                 }
             } else {
+                let log = TrackingModel(labelControl: "SearchBox", event: "Search", note: searchEntry, timestamp: Date().timeIntervalSince1970)
+                TrackingFlowManager.sharedTrackingFlowManager.addTrackingLog(log)
                 NetworkHandler.sharedNetworkHandler.sendSearch(withSearchEntry: searchEntry) { data, response, error in
                     let json = JSON(data)
                     if let success = json["success"].bool, success == true {
                         guard let friendList = json["data"].array else { return}
                         for json in friendList {
-                            let user = UserModel(id: json["_id"].string, name: json["Name"].string, password: nil, phoneNumber: searchEntry, avatarURL: nil)
+                            let user = UserModel(id: json["_id"].string, name: json["Name"].string, password: nil, phoneNumber: searchEntry, birthDay: nil, avatarURL: nil)
                             self.showList.append(user)
                         }
                         DispatchQueue.main.async {
@@ -196,6 +279,6 @@ extension ChatThreadViewController: UISearchBarDelegate {
                 }
             }
         }
-        DispatchQueue.global(qos: .default).asyncAfter(deadline: .now() + 0.58, execute: self.searchWorkItem!)
+        DispatchQueue.global(qos: .default).asyncAfter(deadline: .now() + 0.6, execute: self.searchWorkItem!)
     }
 }

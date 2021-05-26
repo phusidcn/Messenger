@@ -12,6 +12,7 @@ class CoreContext: NSObject {
     var userWaitingFriendShip: [UserModel] = []
     var incommingMessage: [MessageModel] = []
     var groupIncommingMessage: [MessageModel] = []
+    var bannerId: String?
     
     var currentUser: UserModel?
     

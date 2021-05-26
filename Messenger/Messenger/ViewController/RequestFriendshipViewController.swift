@@ -62,6 +62,10 @@ class RequestFriendshipViewController: UIViewController {
     
     @objc func tappedToSendRequest(_ sender: UIButton) {
         guard let userId = self.userModel?.id else { return }
+        //---Log---
+        let log = TrackingModel(labelControl: "Send request friendship", event: "touchUpInside", timestamp: Date().timeIntervalSince1970)
+        TrackingFlowManager.sharedTrackingFlowManager.addTrackingLog(log)
+        //---Log---
         ChatSocket.sharedChatSocket.sendFriendshipRequest(to: userId, greetingMessage: "Hello, I want to make friend with you")
         self.navigationController?.dismiss(animated: true, completion: nil)
     }

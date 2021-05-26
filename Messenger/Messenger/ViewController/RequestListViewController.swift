@@ -59,6 +59,10 @@ class RequestListViewController: UIViewController {
 extension RequestListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let user = requestedUser[indexPath.row]
+        //---Log---
+        let log = TrackingModel(labelControl: user.userId, event: "touchUpInside", timestamp: Date().timeIntervalSince1970)
+        TrackingFlowManager.sharedTrackingFlowManager.addTrackingLog(log)
+        //---Log---
         coordinator?.coordinatorToResponseView(withUser: user)
     }
 }

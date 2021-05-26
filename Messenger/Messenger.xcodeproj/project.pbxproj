@@ -12,6 +12,8 @@
 		532E25F22653D03D009420A6 /* ResponseRequestCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532E25F12653D03D009420A6 /* ResponseRequestCoordinator.swift */; };
 		532E25F42653D7F4009420A6 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 532E25F32653D7F4009420A6 /* TabBarController.swift */; };
 		5335DB4F2650433500B1E0CD /* RequestFriendshipCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5335DB4E2650433500B1E0CD /* RequestFriendshipCoordinator.swift */; };
+		533E19C8265E379400F74DAC /* BannerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533E19C7265E379400F74DAC /* BannerViewCell.swift */; };
+		533E19CA265E410400F74DAC /* BannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533E19C9265E410400F74DAC /* BannerModel.swift */; };
 		5347DAD22631D34C001CBC1E /* SceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5347DAD12631D34C001CBC1E /* SceneCoordinator.swift */; };
 		5347DADA2631DF80001CBC1E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5347DAD92631DF80001CBC1E /* LoginViewController.swift */; };
 		536EE2FB262E011D00EECB3F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536EE2FA262E011D00EECB3F /* AppDelegate.swift */; };
@@ -46,6 +48,9 @@
 		53A785292650E20000212933 /* ResponseRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A785282650E20000212933 /* ResponseRequestViewController.swift */; };
 		53AA3877264706C200F9CFEB /* CoreContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AA3876264706C200F9CFEB /* CoreContext.swift */; };
 		53AB7E2D264FF0DD00744FAD /* SignupNetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AB7E2C264FF0DD00744FAD /* SignupNetworkModel.swift */; };
+		53B1217B265EA71E00AC613D /* NSAttributedString+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B1217A265EA71E00AC613D /* NSAttributedString+Size.swift */; };
+		53B70459265A66ED006CDF87 /* TrackingFlowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B70458265A66ED006CDF87 /* TrackingFlowManager.swift */; };
+		53B7045B265A676F006CDF87 /* TrackingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B7045A265A676F006CDF87 /* TrackingModel.swift */; };
 		53BFBCF5263F7D8800A53CE8 /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BFBCF4263F7D8800A53CE8 /* MessageViewModel.swift */; };
 		53C39D2F263D07E200272753 /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C39D2E263D07E200272753 /* MessageViewController.swift */; };
 		53C39D31263D080B00272753 /* MessageViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C39D30263D080B00272753 /* MessageViewCoordinator.swift */; };
@@ -94,6 +99,8 @@
 		532E25F12653D03D009420A6 /* ResponseRequestCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseRequestCoordinator.swift; sourceTree = "<group>"; };
 		532E25F32653D7F4009420A6 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		5335DB4E2650433500B1E0CD /* RequestFriendshipCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFriendshipCoordinator.swift; sourceTree = "<group>"; };
+		533E19C7265E379400F74DAC /* BannerViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerViewCell.swift; sourceTree = "<group>"; };
+		533E19C9265E410400F74DAC /* BannerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerModel.swift; sourceTree = "<group>"; };
 		5347DAD12631D34C001CBC1E /* SceneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCoordinator.swift; sourceTree = "<group>"; };
 		5347DAD92631DF80001CBC1E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		536EE2F7262E011D00EECB3F /* Messenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Messenger.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -134,6 +141,9 @@
 		53A785282650E20000212933 /* ResponseRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseRequestViewController.swift; sourceTree = "<group>"; };
 		53AA3876264706C200F9CFEB /* CoreContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreContext.swift; sourceTree = "<group>"; };
 		53AB7E2C264FF0DD00744FAD /* SignupNetworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupNetworkModel.swift; sourceTree = "<group>"; };
+		53B1217A265EA71E00AC613D /* NSAttributedString+Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Size.swift"; sourceTree = "<group>"; };
+		53B70458265A66ED006CDF87 /* TrackingFlowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingFlowManager.swift; sourceTree = "<group>"; };
+		53B7045A265A676F006CDF87 /* TrackingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingModel.swift; sourceTree = "<group>"; };
 		53BFBCF4263F7D8800A53CE8 /* MessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
 		53C39D2E263D07E200272753 /* MessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		53C39D30263D080B00272753 /* MessageViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewCoordinator.swift; sourceTree = "<group>"; };
@@ -197,15 +207,18 @@
 				5394700A263FF4CD00014E57 /* ChatBarType.swift */,
 				5394700C263FF4E900014E57 /* ImagePickerType.swift */,
 				531DAC0F2658059C0095ECF0 /* FriendRequestModel.swift */,
+				533E19C9265E410400F74DAC /* BannerModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
 		};
-		530707AB2654C2E50050E80F /* TestingFlow */ = {
+		530707AB2654C2E50050E80F /* TrackingFlow */ = {
 			isa = PBXGroup;
 			children = (
+				53B70458265A66ED006CDF87 /* TrackingFlowManager.swift */,
+				53B7045A265A676F006CDF87 /* TrackingModel.swift */,
 			);
-			path = TestingFlow;
+			path = TrackingFlow;
 			sourceTree = "<group>";
 		};
 		5309200726478A0300A1C5EE /* Database */ = {
@@ -241,7 +254,7 @@
 		536EE2F9262E011D00EECB3F /* Messenger */ = {
 			isa = PBXGroup;
 			children = (
-				530707AB2654C2E50050E80F /* TestingFlow */,
+				530707AB2654C2E50050E80F /* TrackingFlow */,
 				5309200726478A0300A1C5EE /* Database */,
 				53AA3875264706A800F9CFEB /* Context */,
 				53D0D9512646A86A009FBBE1 /* Network */,
@@ -286,6 +299,7 @@
 				53947010263FF8A600014E57 /* MessageImageCell.swift */,
 				53947012263FF9E800014E57 /* MessageTextCell.swift */,
 				53947014263FFA0400014E57 /* SelectionStyleCell.swift */,
+				533E19C7265E379400F74DAC /* BannerViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -352,6 +366,7 @@
 				5394701B263FFA7600014E57 /* UIBezierPath.swift */,
 				5394701D263FFA8F00014E57 /* Data.swift */,
 				5394701F263FFAA800014E57 /* UIViewController.swift */,
+				53B1217A265EA71E00AC613D /* NSAttributedString+Size.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -654,6 +669,7 @@
 				53947011263FF8A600014E57 /* MessageImageCell.swift in Sources */,
 				53947005263FF27900014E57 /* FileInfo.swift in Sources */,
 				53E1E85926353FC7009BAC13 /* LoginCoordinator.swift in Sources */,
+				53B70459265A66ED006CDF87 /* TrackingFlowManager.swift in Sources */,
 				5335DB4F2650433500B1E0CD /* RequestFriendshipCoordinator.swift in Sources */,
 				53947020263FFAA800014E57 /* UIViewController.swift in Sources */,
 				53947009263FF4B000014E57 /* ListResponseObject.swift in Sources */,
@@ -665,6 +681,7 @@
 				53947013263FF9E800014E57 /* MessageTextCell.swift in Sources */,
 				5394701A263FFA5600014E57 /* KingFisher.swift in Sources */,
 				5394700D263FF4E900014E57 /* ImagePickerType.swift in Sources */,
+				53B1217B265EA71E00AC613D /* NSAttributedString+Size.swift in Sources */,
 				536EE2FD262E011D00EECB3F /* SceneDelegate.swift in Sources */,
 				53E92E2D2637C1080004607A /* ChatThreadCoordinator.swift in Sources */,
 				536EE344262E064000EECB3F /* OnboardViewController.swift in Sources */,
@@ -676,6 +693,7 @@
 				53C39D37263D0ECA00272753 /* QuickActionModel.swift in Sources */,
 				53D0D9552646C26F009FBBE1 /* NetworkHandler.swift in Sources */,
 				536EE305262E011D00EECB3F /* Messenger.xcdatamodeld in Sources */,
+				533E19C8265E379400F74DAC /* BannerViewCell.swift in Sources */,
 				536EE339262E023000EECB3F /* BaseCoordinator.swift in Sources */,
 				53EAE0112653E8F50044774E /* RequestListViewController.swift in Sources */,
 				53947018263FFA3100014E57 /* Array.swift in Sources */,
@@ -686,6 +704,8 @@
 				53D0D9532646A882009FBBE1 /* ChatSocket.swift in Sources */,
 				5394701C263FFA7600014E57 /* UIBezierPath.swift in Sources */,
 				532E25F22653D03D009420A6 /* ResponseRequestCoordinator.swift in Sources */,
+				533E19CA265E410400F74DAC /* BannerModel.swift in Sources */,
+				53B7045B265A676F006CDF87 /* TrackingModel.swift in Sources */,
 				53C39D35263D0BC000272753 /* MessageModel.swift in Sources */,
 				5373E9AF262F48CB00F083D8 /* OnboardCoordinator.swift in Sources */,
 				5373E9A7262F466000F083D8 /* AppCoordinator.swift in Sources */,

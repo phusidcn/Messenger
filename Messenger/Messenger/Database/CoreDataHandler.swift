@@ -78,6 +78,7 @@ class CoreDataHandler: NSObject {
         user.setValue(userModel.id, forKey: "id")
         user.setValue(userModel.phoneNumber, forKey: "phone")
         user.setValue(userModel.name, forKey: "name")
+        user.setValue(userModel, forKey: "birthday")
         do {
             try managedContext.save()
         } catch let error {

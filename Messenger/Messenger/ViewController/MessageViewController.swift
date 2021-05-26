@@ -40,6 +40,14 @@ class MessageViewController: ChatViewController {
         self.navigationController?.navigationBar.isHidden = false
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //---Log---
+        let log = TrackingModel(labelControl: "Back Button", event: "touchUpInside", timestamp: Date().timeIntervalSince1970)
+        TrackingFlowManager.sharedTrackingFlowManager.addTrackingLog(log)
+        //---Log---
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -87,6 +95,10 @@ class MessageViewController: ChatViewController {
                               createdAt: Date(), text: chatBarView.textView.text)
         addMessage(message)
         super.didPressSendButton(sender)
+        //---Log---
+        let log = TrackingModel(labelControl: "Send Message", event: "touchUpInside", timestamp: Date().timeIntervalSince1970)
+        TrackingFlowManager.sharedTrackingFlowManager.addTrackingLog(log)
+        //---Log---
         ChatSocket.sharedChatSocket.sendMessage(message: message, to: receiverUser, withCompletion: nil)
         CoreDataHandler.shareCoreDataHandler.saveMessage(messageModel: message)
     }
@@ -217,11 +229,11 @@ extension MessageViewController {
             var user: UserModel
             switch numberUserTypings {
             case 0:
-                user = UserModel(id: "1", name: "Harry", password: "0", phoneNumber: "0")
+                user = UserModel(id: "1", name: "Harry", password: "0", phoneNumber: "0", birthDay: nil)
             case 1:
-                user = UserModel(id: "2", name: "Bob", password: "0", phoneNumber: "0")
+                user = UserModel(id: "2", name: "Bob", password: "0", phoneNumber: "0", birthDay: nil)
             default:
-                user = UserModel(id: "3", name: "Liliana", password: "0", phoneNumber: "0")
+                user = UserModel(id: "3", name: "Liliana", password: "0", phoneNumber: "0", birthDay: nil)
             }
             viewModel.users.append(user)
             typingIndicatorView.insertUser(user)
@@ -265,3 +277,4 @@ extension MessageViewController: ChatSocketMessageDelegate {
         CoreDataHandler.shareCoreDataHandler.saveMessage(messageModel: message)
     }
 }
+

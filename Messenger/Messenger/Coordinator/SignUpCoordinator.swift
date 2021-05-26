@@ -22,7 +22,7 @@ class SignUpCoordinator: BaseCoordinator {
     }
     
     func coordinateToThreadChat() {
-        let chatThreadCoordinator = ChatThreadCoordinator(navigationController: navigationController)
-        coordinate(to: chatThreadCoordinator)
+        let tabBarCoordinator = TabBarCoordinator(navigationController: navigationController)
+        coordinate(to: tabBarCoordinator)
     }
 }
