@@ -7,7 +7,7 @@
 
 import Foundation
 
-let hostAddress = "192.168.1.4"
+let hostAddress = "115.74.21.169"
 let hostPort = 8080
 
 class NetworkHandler: NSObject {
